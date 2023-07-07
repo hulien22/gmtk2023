@@ -1,16 +1,13 @@
 extends Node2D
 
-# POSITION is (column, row)
+# POSITION is (row, column)
 var posn: Vector2 = Vector2.ZERO
 var is_player: bool = false
 var type: Global.TileType
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if (is_player):
-		$PlayerFace.visible = true
-	else:
-		$PlayerFace.visible = false
+	set_is_player(false)
 	$Button.pressed.connect(self._button_pressed)
 
 func set_type(t: Global.TileType):
@@ -28,20 +25,27 @@ func set_type(t: Global.TileType):
 			$ColorRect.color = Color.BLUE
 		Global.TileType.PURPLE:
 			$ColorRect.color = Color.PURPLE
-		
 
+func copy_from(tile):
+	#posn = tile.posn
+	set_is_player(tile.is_player)
+	set_type(tile.type)
+#	print("::", posn, is_player, type)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func set_is_player():
-	is_player = true
-	$PlayerFace.visible = true
+func set_is_player(enable:bool):
+	is_player = enable
+	if (is_player):
+		$PlayerFace.visible = true
+	else:
+		$PlayerFace.visible = false
 
 func set_clickable(enable: bool):
-	print(posn, enable)
+	#print(posn, enable)
 	$Button.visible = enable
 
 func _button_pressed():
-	pass
+	Events.emit_signal("move_player_click", posn)

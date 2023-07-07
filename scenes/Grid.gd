@@ -40,14 +40,36 @@ func build_grid(height, length):
 	
 	# pick one tile to be the player
 	var p_index = Global.rng.randi_range(0,height*length - 1)
-	player_posn = Vector2(p_index / length,p_index % height)
-	tiles[p_index / length][p_index % height].set_is_player()
+	player_posn = Vector2(p_index % height, p_index / length)
+	tiles[p_index / length][p_index % height].set_is_player(true)
 
 func set_clickable_tiles():
 	for h in height:
 		for w in width:
-			if (abs(player_posn.x - h) + abs(player_posn.y - w) == 1):
+			if (abs(player_posn.y - h) + abs(player_posn.x - w) == 1):
 				tiles[h][w].set_clickable(true)
 			else:
 				tiles[h][w].set_clickable(false)
+
+func disable_all_clickable_tiles():
+	for h in height:
+		for w in width:
+			tiles[h][w].set_clickable(false)
+
+func swap_tiles(a:Vector2, b:Vector2):
+	print("swapping tiles ", a, b)
+	var temp_tile_a = Tile.instantiate()
+	temp_tile_a.copy_from(tiles[a.y][a.x])
+	tiles[a.y][a.x].copy_from(tiles[b.y][b.x])
+	tiles[b.y][b.x].copy_from(temp_tile_a)
+
+func swap_player(swap_posn:Vector2):
+	disable_all_clickable_tiles()
+	#Play animation?
 	
+	swap_tiles(player_posn, swap_posn)
+	player_posn = swap_posn
+	print(player_posn)
+	# check for matches
+	
+	set_clickable_tiles()

@@ -1,6 +1,5 @@
 extends Node
 
-
 var rng = RandomNumberGenerator.new()
 
 enum TileType {
