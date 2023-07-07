@@ -1,6 +1,6 @@
 extends Node2D
 
-# POSITION is (row, column)
+# POSITION is (column, row)
 var posn: Vector2 = Vector2.ZERO
 var is_player: bool = false
 var type: Global.TileType
@@ -25,6 +25,9 @@ func set_type(t: Global.TileType):
 			$ColorRect.color = Color.BLUE
 		Global.TileType.PURPLE:
 			$ColorRect.color = Color.PURPLE
+		Global.TileType.EMPTY:
+			# explode and delete?
+			visible = false
 
 func copy_from(tile):
 	#posn = tile.posn

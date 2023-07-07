@@ -44,14 +44,51 @@ func build_grid(height, length):
 	player_posn = Vector2(p_index % height, p_index / length)
 	tiles[p_index / length][p_index % height].set_is_player(true)
 
-func check_color(posn, type):
+func check_color_x(posn, type):
 	if (posn.x >= 2):
 		if (tiles[posn.y][posn.x-1].type == type && tiles[posn.y][posn.x-2].type == type):
 			return false
+	return true
+func check_color_y(posn, type):
 	if (posn.y >= 2):
 		if (tiles[posn.y-1][posn.x].type == type && tiles[posn.y-2][posn.x].type == type):
 			return false
 	return true
+	
+func check_color(posn, type):
+	if (check_color_x(posn, type)):
+		return check_color_y(posn, type)
+
+func check_for_matches():
+	# Get all tiles to destroy
+	var matches: Array[Vector2] = []
+	for h in height:
+		for w in width:
+			if (!check_color_x(tiles[h][w].posn, tiles[h][w].type)):
+				for i in 3:
+					var p = tiles[h][w - i].posn
+					if (!matches.has(p)):
+						matches.append(p)
+			if (!check_color_y(tiles[h][w].posn, tiles[h][w].type)):
+				for i in 3:
+					var p = tiles[h - i][w].posn
+					if (!matches.has(p)):
+						matches.append(p)
+
+	# Go through matches to find special matches
+	for m in matches:
+		var matches_col = 0
+		var matches_row = 0
+		for other in matches:
+			if (other.x == m.x && abs(other.y - m.y) <= 3):
+				matches_col += 1
+			if (other.y == m.y && abs(other.x - m.x) <= 3):
+				matches_row += 1
+		print("col matches: ", matches_col, "row matches: ", matches_row)
+	
+	# Delete all the nodes
+	for m in matches:
+		tiles[m.y][m.x].set_type(Global.TileType.EMPTY)
 
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread
@@ -90,6 +127,12 @@ func swap_tiles(a:Vector2, b:Vector2):
 	tiles[b.y][b.x].move(posn_from_grid(Vector2(b.x,b.y)))
 #	tiles[a.y][a.x].move(tile_b.position)
 #	tiles[b.y][b.x].move(tile_a_position)
+
+	# update player posn if we moved it
+	if (a == player_posn):
+		player_posn = b
+	elif (b == player_posn):
+		player_posn = a
 	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
 
 func swap_player(swap_posn:Vector2):
@@ -97,8 +140,8 @@ func swap_player(swap_posn:Vector2):
 	#Play animation?
 	
 	swap_tiles(player_posn, swap_posn)
-	player_posn = swap_posn
 	print(player_posn)
 	# check for matches
+	check_for_matches()
 	
 	set_clickable_tiles()

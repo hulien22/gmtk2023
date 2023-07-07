@@ -8,7 +8,8 @@ enum TileType {
 	YELLOW,
 	GREEN,
 	BLUE,
-	PURPLE
+	PURPLE,
+	EMPTY # used for deleted tiles
 }
 
 const MAX_COLOR = 6
