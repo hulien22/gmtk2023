@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl48nlgu3crf"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_clwvd"]
+[ext_resource type="Texture2D" uid="uid://btihnq2roxvea" path="res://art/template.png" id="1_k48c2"]
+[ext_resource type="PackedScene" uid="uid://dnwfr8rhfk5st" path="res://scenes/Grid.tscn" id="2_tq8kh"]
+[ext_resource type="Texture2D" uid="uid://dix8lgvg4b460" path="res://art/template_colored.png" id="4_josl6"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_clwvd")
+
+[node name="Template" type="Sprite2D" parent="."]
+position = Vector2(639, 359)
+texture = ExtResource("1_k48c2")
+
+[node name="Grid" parent="." instance=ExtResource("2_tq8kh")]
+position = Vector2(685, 171)
+tile_spread = 54.04
+
+[node name="TemplateColored" type="Sprite2D" parent="."]
+position = Vector2(183, 361)
+texture = ExtResource("4_josl6")
+
+[node name="Grid2" parent="." instance=ExtResource("2_tq8kh")]
+position = Vector2(282, 209)
+tile_spread = 54.04
+tile_size = 1.2
