@@ -33,7 +33,8 @@ func build_grid(height, length):
 			new_tile.position = posn_from_grid(new_tile.posn)
 			new_tile.scale = Vector2(tile_size, tile_size)
 			var color = Global.get_random_color()
-			# TODO check that this doesn't form a match
+			while (!check_color(new_tile.posn, color)):
+				color = Global.get_random_color()
 			new_tile.set_type(color)
 			add_child(new_tile)
 			tiles[h].push_back(new_tile)
@@ -42,6 +43,15 @@ func build_grid(height, length):
 	var p_index = Global.rng.randi_range(0,height*length - 1)
 	player_posn = Vector2(p_index % height, p_index / length)
 	tiles[p_index / length][p_index % height].set_is_player(true)
+
+func check_color(posn, type):
+	if (posn.x >= 2):
+		if (tiles[posn.y][posn.x-1].type == type && tiles[posn.y][posn.x-2].type == type):
+			return false
+	if (posn.y >= 2):
+		if (tiles[posn.y-1][posn.x].type == type && tiles[posn.y-2][posn.x].type == type):
+			return false
+	return true
 
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread
