@@ -46,6 +46,12 @@ func set_is_player(enable:bool):
 func set_clickable(enable: bool):
 	#print(posn, enable)
 	$Button.visible = enable
+	$RichTextLabel.clear()
+	$RichTextLabel.add_text(str(posn))
 
 func _button_pressed():
 	Events.emit_signal("move_player_click", posn)
+
+func move(target):
+	var tween: Tween = create_tween()
+	tween.tween_property(self,"position",target, 0.3).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
