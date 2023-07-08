@@ -6,6 +6,7 @@ var is_player: bool = false
 var type: Global.TileType
 var modifier: Global.Modifier
 
+var marked_for_destruction: bool = false
 var placing_bomb: bool = false
 var endpoints: Array[Vector2] = []
 
