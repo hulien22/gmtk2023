@@ -51,7 +51,7 @@ position = Vector2(177, 367)
 texture = ExtResource("6_ufsn4")
 
 [node name="Grid2" parent="." instance=ExtResource("2_tq8kh")]
-position = Vector2(242, 118)
+position = Vector2(242, 116)
 tile_spread = 62.76
 tile_size = 1.5
 
