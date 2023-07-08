@@ -15,6 +15,28 @@ func _ready():
 	$PlayerMoveTimer.connect("timeout", _on_playermovetimer_timeout)
 	pass # Replace with function body.
 
+func _input(event):
+	if can_click:
+		if event.is_action_pressed("player_movement_left"):
+			# Get player posn
+			var posn = $Grid2.player_posn
+			if (posn.x > 0):
+				_on_tile_clicked(Vector2(posn.x - 1, posn.y))
+		elif event.is_action_pressed("player_movement_right"):
+			# Get player posn
+			var posn = $Grid2.player_posn
+			if (posn.x < $Grid2.width - 1):
+				_on_tile_clicked(Vector2(posn.x + 1, posn.y))
+		elif event.is_action_pressed("player_movement_up"):
+			# Get player posn
+			var posn = $Grid2.player_posn
+			if (posn.y > 0):
+				_on_tile_clicked(Vector2(posn.x, posn.y - 1))
+		elif event.is_action_pressed("player_movement_down"):
+			# Get player posn
+			var posn = $Grid2.player_posn
+			if (posn.y < $Grid2.height - 1):
+				_on_tile_clicked(Vector2(posn.x, posn.y + 1))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

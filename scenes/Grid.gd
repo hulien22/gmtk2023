@@ -104,6 +104,7 @@ func set_clickable_tiles():
 		for w in width:
 			if (abs(player_posn.y - h) + abs(player_posn.x - w) == 1):
 				tiles[h][w].set_clickable(true)
+				
 			else:
 				tiles[h][w].set_clickable(false)
 
