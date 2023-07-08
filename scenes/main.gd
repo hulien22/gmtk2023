@@ -62,6 +62,8 @@ func start_player_turn():
 	# TODO animate the tiles or smth
 	$Swap1.position = $Grid2.global_posn_from_grid(finger_swap[0])
 	$Swap2.position = $Grid2.global_posn_from_grid(finger_swap[1])
+	$Swap1.visible = true
+	$Swap2.visible = true
 	print("finger will swap: ", finger_swap)
 	can_click = true
 	$Grid2.set_clickable_tiles()
@@ -85,6 +87,8 @@ func _on_turntimer_timeout():
 		end_finger_turn()
 
 func _on_fingerclick_complete():
+	$Swap1.visible = false
+	$Swap2.visible = false
 	$Grid2.swap_tiles(finger_swap[0], finger_swap[1], true)
 	$FingerMoveTimer.start()
 
@@ -123,6 +127,8 @@ func check_loop():
 		await get_tree().create_timer(0.4).timeout
 
 func select_finger_swap():
+	# TODO do we need to be smarter about this to stop player from just corner camping?
+	# Maybe adding bombs will be enough?
 	var max_score = 0
 	var best_move: Array[Vector2] = [Vector2(0, 0), Vector2(1, 0)]
 	for h in $Grid2.height-1:

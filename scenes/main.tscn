@@ -70,6 +70,7 @@ offset_left = 255.0
 offset_top = 673.0
 offset_right = 745.0
 offset_bottom = 700.0
+value = 100.0
 show_percentage = false
 script = ExtResource("5_7i0ym")
 

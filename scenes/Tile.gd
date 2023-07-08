@@ -64,9 +64,11 @@ func _process(delta):
 func set_is_player(enable:bool):
 	is_player = enable
 	if (is_player):
-		$Node/PlayerFace.visible = true
+		$Node/PlayerFaces.visible = true
+		$Node/PlayerFaces.set_animation("Happy")
+		$Node/PlayerFaces.play()
 	else:
-		$Node/PlayerFace.visible = false
+		$Node/PlayerFaces.visible = false
 
 func set_clickable(enable: bool):
 	#print(posn, enable)
