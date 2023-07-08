@@ -35,7 +35,7 @@ func build_grid(height, length):
 			var color = Global.get_random_color()
 			while (!check_color(new_tile.posn, color)):
 				color = Global.get_random_color()
-			new_tile.set_type(color)
+			new_tile.set_type_and_modifier(color, Global.Modifier.NONE)
 			add_child(new_tile)
 			tiles[h].push_back(new_tile)
 	
@@ -93,7 +93,7 @@ func check_for_matches():
 	# Delete all the nodes
 	for m in matches:
 		tiles[m.y][m.x].destroy()
-		tiles[m.y][m.x].set_type(Global.TileType.EMPTY)
+		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 		
 	
 	return (matches.size() > 0)
@@ -175,7 +175,7 @@ func drop_tiles():
 			new_tile.position = posn_from_grid(Vector2(w, 0 - i - 1))
 			new_tile.scale = Vector2(tile_size, tile_size)
 			var color = Global.get_random_color()
-			new_tile.set_type(color)
+			new_tile.set_type_and_modifier(color, Global.Modifier.NONE)
 			add_child(new_tile)
 			tiles[delete_count - i - 1][w] = new_tile
 

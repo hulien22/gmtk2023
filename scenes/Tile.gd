@@ -4,11 +4,16 @@ extends Node2D
 var posn: Vector2 = Vector2.ZERO
 var is_player: bool = false
 var type: Global.TileType
+var modifier: Global.Modifier
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_is_player(false)
 	$Node/Button.pressed.connect(self._button_pressed)
+
+func set_type_and_modifier(t: Global.TileType, m: Global.Modifier):
+	set_modifier(m)
+	set_type(t)
 
 func set_type(t: Global.TileType):
 	type = t
@@ -29,6 +34,22 @@ func set_type(t: Global.TileType):
 			# explode and delete?
 #			visible = false
 			pass
+	$Node/ColorRect.modulate.a = 1
+	$Node/Sprites.frame = Global.get_index_from_type(t)
+
+func set_modifier(m: Global.Modifier):
+	modifier = m
+	match m:
+		Global.Modifier.NONE:
+			$Node/Sprites.set_animation("Fruit")
+		Global.Modifier.VERTICAL:
+			$Node/Sprites.set_animation("VerticalBomb")
+		Global.Modifier.HORIZONTAL:
+			$Node/Sprites.set_animation("HorizontalBomb")
+		Global.Modifier.DESTROYER_OF_EIGHT_TILES:
+			$Node/Sprites.set_animation("DestroyerBomb")
+		Global.Modifier.BOMB:
+			$Node/Sprites.set_animation("FruitBomb")
 
 func copy_from(tile):
 	#posn = tile.posn
@@ -43,9 +64,11 @@ func _process(delta):
 func set_is_player(enable:bool):
 	is_player = enable
 	if (is_player):
-		$Node/PlayerFace.visible = true
+		$Node/PlayerFaces.visible = true
+		$Node/PlayerFaces.set_animation("Happy")
+		$Node/PlayerFaces.play()
 	else:
-		$Node/PlayerFace.visible = false
+		$Node/PlayerFaces.visible = false
 
 func set_clickable(enable: bool):
 	#print(posn, enable)
