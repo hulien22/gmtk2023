@@ -1,0 +1,18 @@
+[gd_scene load_steps=10 format=3 uid="uid://x8kn1d2320sb"]
+
+[ext_resource type="Script" path="res://scenes/AudioAutoload.gd" id="1_jdtue"]
+[ext_resource type="AudioStream" uid="uid://cd44elok4f4ws" path="res://audio/FruitSugarHighV1.mp3" id="2_yfefp"]
+[ext_resource type="AudioStream" uid="uid://bqquvx6huo3en" path="res://audio/pop_c5.mp3" id="3_h8qhr"]
+[ext_resource type="AudioStream" uid="uid://nymoqr84wdfv" path="res://audio/pop_d5.mp3" id="4_st6i7"]
+[ext_resource type="AudioStream" uid="uid://oc5txfpg350g" path="res://audio/pop_e5.mp3" id="5_ilo8h"]
+[ext_resource type="AudioStream" uid="uid://ssso7bmor5xw" path="res://audio/pop_f5.mp3" id="6_51bnt"]
+[ext_resource type="AudioStream" uid="uid://daehuqn2d3gj3" path="res://audio/pop_g5.mp3" id="7_nmy4r"]
+[ext_resource type="AudioStream" uid="uid://bl7qnhn3rqon1" path="res://audio/pop_a5.mp3" id="8_27gno"]
+[ext_resource type="AudioStream" uid="uid://dc5ba7piwle51" path="res://audio/pop_b5.mp3" id="9_7ixvf"]
+
+[node name="AudioAutoload" type="AudioStreamPlayer"]
+script = ExtResource("1_jdtue")
+song = ExtResource("2_yfefp")
+pops = Array[AudioStream]([ExtResource("3_h8qhr"), ExtResource("4_st6i7"), ExtResource("5_ilo8h"), ExtResource("6_51bnt"), ExtResource("7_nmy4r"), ExtResource("8_27gno"), ExtResource("9_7ixvf"), ExtResource("3_h8qhr")])
+
+[node name="SoundEffect" type="AudioStreamPlayer" parent="."]
