@@ -61,22 +61,51 @@ func check_color(posn, type):
 
 func check_for_matches():
 	# Get all tiles to destroy
-	var matches: Array[Vector2] = []
+	var all_matches: Array[Vector2] = []
+	var matches: Dictionary = {}
+	# TODO add dicts here for the special bombs
 	for h in height:
 		for w in width:
 			if (!check_color_x(tiles[h][w].posn, tiles[h][w].type)):
-				for i in 3:
+				for i in range(2, -1, -1):
 					var p = tiles[h][w - i].posn
 					if (!matches.has(p)):
-						matches.append(p)
+						matches[p] = tiles[h][w - i].type
+						all_matches.append(p)
+						
 			if (!check_color_y(tiles[h][w].posn, tiles[h][w].type)):
-				for i in 3:
+				for i in range(2, -1, -1):
 					var p = tiles[h - i][w].posn
 					if (!matches.has(p)):
-						matches.append(p)
+						matches[p] = tiles[h - i][w].type
+						all_matches.append(p)
 
 	# Go through matches to find special matches
 	# TODO also need to check color here?
+	
+	print(all_matches)
+	# first check for long stretches 5+
+	# search right then down
+	for m in all_matches:
+		for dir in [Vector2.RIGHT, Vector2.DOWN]:
+			var c = count_matches_in_direction(m, matches, dir)
+			if (c >= 5):
+				var match_color = matches[m]
+				var mid = floor((c-1) / 2)
+				for i in c:
+					var p = m + dir*i
+					if (i == mid):
+						tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.BOMB)
+						tiles[p.y][p.x].placing_bomb = true
+						tiles[p.y][p.x].endpoints.clear()
+						tiles[p.y][p.x].endpoints.append(m)
+						tiles[p.y][p.x].endpoints.append(m + dir * (c - 1))
+					else:
+#						tiles[p.y][p.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
+						matches.erase(p)
+						tiles[p.y][p.x].placing_bomb = false
+	
+	
 	for m in matches:
 		var matches_col = 0
 		var matches_row = 0
@@ -87,16 +116,33 @@ func check_for_matches():
 				matches_row += 1
 		print("col matches: ", matches_col, "row matches: ", matches_row)
 	
+	# TODO handle the special bombs (loop?)
+	
 	if (matches.size() > 0):
 		_debug_log_grid()
 	
 	# Delete all the nodes
-	for m in matches:
-		tiles[m.y][m.x].destroy()
-		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
+	for m in all_matches:
+#		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
+		if (!tiles[m.y][m.x].placing_bomb):
+			tiles[m.y][m.x].destroy(20)
+			tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 		
 	
 	return (matches.size() > 0)
+
+func count_matches_in_direction(posn:Vector2, dict:Dictionary, dir:Vector2):
+	var match_color = dict.get(posn)
+	if (match_color == null):
+		return 0
+	var count = 1;
+	while (true):
+		var c = dict.get(posn + dir*count)
+		if (c == match_color):
+			count += 1
+		else:
+			break
+	return count
 
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread

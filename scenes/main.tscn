@@ -72,12 +72,14 @@ position = Vector2(243, 116)
 scale = Vector2(0.572727, 0.572727)
 sprite_frames = SubResource("SpriteFrames_g014k")
 frame_progress = 0.765407
+speed_scale = 0.5
 
 [node name="Swap2" type="AnimatedSprite2D" parent="."]
 position = Vector2(171, 116)
 scale = Vector2(0.572727, 0.572727)
 sprite_frames = SubResource("SpriteFrames_g014k")
 frame_progress = 0.830006
+speed_scale = 0.5
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = 255.0

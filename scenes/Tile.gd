@@ -6,6 +6,9 @@ var is_player: bool = false
 var type: Global.TileType
 var modifier: Global.Modifier
 
+var placing_bomb: bool = false
+var endpoints: Array[Vector2] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_is_player(false)
@@ -93,7 +96,8 @@ var sprites = [preload("res://art/fruits/apple.png"), preload("res://art/fruits/
 			   preload("res://art/fruits/blueberry.png"), preload("res://art/fruits/grape.png")]
 var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres").duplicate(true)
 
-func destroy():
+func destroy(points: int):
+	$Node/RichTextLabel.add_text(str(points))
 	#play destruction animation
 #	var tween: Tween = create_tween()
 #	tween.connect("finished", delete_self)
