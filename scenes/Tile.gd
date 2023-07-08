@@ -74,6 +74,7 @@ func destroy():
 	timer.start()
 	# hide rest of things
 	$Node.visible = false
+	# TODO special effect if this is the player object??
 
 func delete_self():
 	print("delete_self")
