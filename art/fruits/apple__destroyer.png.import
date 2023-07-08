@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbwkuo11y6xg3"
-path="res://.godot/imported/apple_vertical.png-3ce7779b3a3d23c40cb6bd8c2f49446e.ctex"
+uid="uid://r4k0q01itku4"
+path="res://.godot/imported/apple__destroyer.png-effe3a11cf651cc0a8c0b7ba2e507e72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/apple_vertical.png"
-dest_files=["res://.godot/imported/apple_vertical.png-3ce7779b3a3d23c40cb6bd8c2f49446e.ctex"]
+source_file="res://art/fruits/apple__destroyer.png"
+dest_files=["res://.godot/imported/apple__destroyer.png-effe3a11cf651cc0a8c0b7ba2e507e72.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7m7fl7suggxf"
-path="res://.godot/imported/orange_explode.png-538bd24c890bd69053a1e87e92d67ef8.ctex"
+uid="uid://lecda8wvmev8"
+path="res://.godot/imported/pear_explode.png-ef44663d820cfb8b4ea9e50594fe581c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/orange_explode.png"
-dest_files=["res://.godot/imported/orange_explode.png-538bd24c890bd69053a1e87e92d67ef8.ctex"]
+source_file="res://art/fruits/pear_explode.png"
+dest_files=["res://.godot/imported/pear_explode.png-ef44663d820cfb8b4ea9e50594fe581c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lbrmmv82kjdd"
-path="res://.godot/imported/blueberry_horizontal.png-b6041d3e384fee698523302ae939fc9e.ctex"
+uid="uid://dbwkuo11y6xg3"
+path="res://.godot/imported/apple_vertical.png-5b57dc238dc9a1e373e7ade52cfa9ad5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/blueberry_horizontal.png"
-dest_files=["res://.godot/imported/blueberry_horizontal.png-b6041d3e384fee698523302ae939fc9e.ctex"]
+source_file="res://art/fruits/apple_vertical.png"
+dest_files=["res://.godot/imported/apple_vertical.png-5b57dc238dc9a1e373e7ade52cfa9ad5.ctex"]
 
 [params]
 

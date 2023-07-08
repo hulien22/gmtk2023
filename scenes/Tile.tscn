@@ -1,8 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://br8esrrp0i7wc"]
+[gd_scene load_steps=7 format=3 uid="uid://br8esrrp0i7wc"]
 
 [ext_resource type="Script" path="res://scenes/Tile.gd" id="1_qfmx2"]
 [ext_resource type="Texture2D" uid="uid://wepn0hs13a4c" path="res://art/icon.svg" id="2_syojg"]
 [ext_resource type="Texture2D" uid="uid://256ffxfyywi3" path="res://art/Pixel.png" id="3_o0d2q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_in7oa"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"DefaultTiles",
+"speed": 5.0
+}]
 
 [sub_resource type="Shader" id="Shader_7hyna"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.1.stable's ParticleProcessMaterial.
@@ -293,6 +301,10 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node"]
+sprite_frames = SubResource("SpriteFrames_in7oa")
+animation = &"DefaultTiles"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false

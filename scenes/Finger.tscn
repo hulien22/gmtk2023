@@ -86,6 +86,7 @@ animations = [{
 script = ExtResource("1_ykc64")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.709804)
 position = Vector2(265, 383)
 sprite_frames = SubResource("SpriteFrames_byiic")
 animation = &"finger_click"

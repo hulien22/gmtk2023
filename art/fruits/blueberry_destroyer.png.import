@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcv66y1qvsnpg"
-path="res://.godot/imported/pear_horizontal.png-4548ed3df6b7db0a0d67468a3ebcc5bb.ctex"
+uid="uid://bx8b1x0ejdfhv"
+path="res://.godot/imported/blueberry_destroyer.png-a51c1e712d6eeeb4529ebf72cf42191f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/pear_horizontal.png"
-dest_files=["res://.godot/imported/pear_horizontal.png-4548ed3df6b7db0a0d67468a3ebcc5bb.ctex"]
+source_file="res://art/fruits/blueberry_destroyer.png"
+dest_files=["res://.godot/imported/blueberry_destroyer.png-a51c1e712d6eeeb4529ebf72cf42191f.ctex"]
 
 [params]
 

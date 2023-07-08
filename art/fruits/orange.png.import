@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmyqr6pb6mkxp"
-path="res://.godot/imported/lemon__destroyer.png-97eabd2c2b43aa50e9a602eedde95d73.ctex"
+uid="uid://cl04rjaed4hnf"
+path="res://.godot/imported/orange.png-06557b461594a6c825084f5d2b443cb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/lemon__destroyer.png"
-dest_files=["res://.godot/imported/lemon__destroyer.png-97eabd2c2b43aa50e9a602eedde95d73.ctex"]
+source_file="res://art/fruits/orange.png"
+dest_files=["res://.godot/imported/orange.png-06557b461594a6c825084f5d2b443cb5.ctex"]
 
 [params]
 

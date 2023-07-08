@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca2biyd7b0r1u"
-path="res://.godot/imported/lemon.png-16e26d52726643274df01cb1a76c2cac.ctex"
+uid="uid://4pbfa0ua5sj6"
+path="res://.godot/imported/pear_vertical.png-28b0355757666a492688fa728dc11b7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/lemon.png"
-dest_files=["res://.godot/imported/lemon.png-16e26d52726643274df01cb1a76c2cac.ctex"]
+source_file="res://art/fruits/pear_vertical.png"
+dest_files=["res://.godot/imported/pear_vertical.png-28b0355757666a492688fa728dc11b7a.ctex"]
 
 [params]
 
