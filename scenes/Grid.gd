@@ -228,7 +228,15 @@ func process_one_bomb():
 					Vector2(1,-1), Vector2(1,0), Vector2(1,1)]:
 			var p = bomb.posn + dir
 			if (p.x >= 0 && p.x < width && p.y >= 0 && p.y < height):
-					add_to_matches_and_bombs(p)
+				add_to_matches_and_bombs(p)
+	elif (bomb.bomb_type == Global.Modifier.VERTICAL):
+		for i in height:
+			var p = Vector2(bomb.posn.x, i)
+			add_to_matches_and_bombs(p)
+	elif (bomb.bomb_type == Global.Modifier.HORIZONTAL):
+		for i in width:
+			var p = Vector2(i, bomb.posn.y)
+			add_to_matches_and_bombs(p)
 	return true
 
 func add_to_matches_and_bombs(p: Vector2):
