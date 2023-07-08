@@ -4,40 +4,127 @@ extends Node2D
 #       can use to determine if there should be a selection icon around tile
 #       and if we should allow/process clicks
 var can_click:bool = true
+var timer_time:float = 10
+@export var min_timer_time: float = 3.0
+@export var timer_decay: float = 0.1
+var finger_swap: Array[Vector2] = []
+
+enum Turn {PLAYER_TURN, FINGER_TURN}
+var turn: Turn = Turn.PLAYER_TURN
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	$Grid2.build_grid(9,9)
 	$Grid2.set_clickable_tiles()
-	print("picked:", select_finger_swap())
+#	print("picked:", select_finger_swap())
 	Events.connect("move_player_click", _on_tile_clicked)
+	Events.connect("finger_click_complete", _on_fingerclick_complete)
+	$TurnTimer.connect("timeout", _on_turntimer_timeout)
 	$PlayerMoveTimer.connect("timeout", _on_playermovetimer_timeout)
-	pass # Replace with function body.
+	$FingerMoveTimer.connect("timeout", _on_fingermovetimer_timeout)
+	
+	$ProgressBar.set_timer_node($TurnTimer)
+	# begin the game
+	start_player_turn()
 
+
+func _input(event):
+	if can_click && turn == Turn.PLAYER_TURN:
+		if event.is_action_pressed("player_movement_left"):
+			# Get player posn
+			var posn = $Grid2.player_posn
+			if (posn.x > 0):
+				_on_tile_clicked(Vector2(posn.x - 1, posn.y))
+		elif event.is_action_pressed("player_movement_right"):
+			# Get player posn
+			var posn = $Grid2.player_posn
+			if (posn.x < $Grid2.width - 1):
+				_on_tile_clicked(Vector2(posn.x + 1, posn.y))
+		elif event.is_action_pressed("player_movement_up"):
+			# Get player posn
+			var posn = $Grid2.player_posn
+			if (posn.y > 0):
+				_on_tile_clicked(Vector2(posn.x, posn.y - 1))
+		elif event.is_action_pressed("player_movement_down"):
+			# Get player posn
+			var posn = $Grid2.player_posn
+			if (posn.y < $Grid2.height - 1):
+				_on_tile_clicked(Vector2(posn.x, posn.y + 1))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+func start_player_turn():
+	turn = Turn.PLAYER_TURN
+	finger_swap = select_finger_swap()
+	# TODO animate the tiles or smth
+	$Swap1.position = $Grid2.global_posn_from_grid(finger_swap[0])
+	$Swap2.position = $Grid2.global_posn_from_grid(finger_swap[1])
+	print("finger will swap: ", finger_swap)
+	can_click = true
+	$Grid2.set_clickable_tiles()
+	$TurnTimer.start(timer_time)
+	timer_time = max(timer_time - timer_decay, min_timer_time)
+
+func stop_player_turn():
+	$TurnTimer.stop()
+	turn = Turn.FINGER_TURN
+	can_click = false
+	$Grid2.disable_all_clickable_tiles()
+
+func _on_turntimer_timeout():
+	stop_player_turn()
+	
+	# Perform the finger swap
+	if (finger_swap.size() == 2):
+		$Finger.click_at_positions($Grid2.global_posn_from_grid(finger_swap[0]), $Grid2.global_posn_from_grid(finger_swap[1]))
+	else:
+		print_debug("ERROR wrong finger_swap size:", finger_swap)
+		end_finger_turn()
+
+func _on_fingerclick_complete():
+	$Grid2.swap_tiles(finger_swap[0], finger_swap[1], true)
+	$FingerMoveTimer.start()
+
+func _on_fingermovetimer_timeout():
+	end_finger_turn()
+
+func end_finger_turn():
+	# Perform all the matches
+	await check_loop()
+	start_player_turn()
+
 func _on_tile_clicked(posn: Vector2):
-	if can_click:
+	if can_click && turn == Turn.PLAYER_TURN:
 		print("Click from posn ", posn)
 		#perform the swap now
 		can_click = false
+		$Grid2.disable_all_clickable_tiles()
 		$Grid2.swap_player(posn)
+		# use player timer to wait for the player swap to finish before doing other things
 		$PlayerMoveTimer.start()
 
 func _on_playermovetimer_timeout():
-	# check for matches
-	$Grid2.check_for_matches()
-	$Grid2.set_clickable_tiles()
-	# set back to true on animation completion?
-	can_click = true
+	# check for matches (TODO move this to just the finger swap)
+#	await check_loop()
+	# set back to true on animation completion (TODO check if player time is over / max moves have been made)
+	if (turn == Turn.PLAYER_TURN):
+		can_click = true
+		$Grid2.set_clickable_tiles()
+
+func check_loop():
+	while ($Grid2.check_for_matches()):
+#		await get_tree().create_timer(0.4).timeout
+		$Grid2.drop_tiles()
+		$Grid2.disable_all_clickable_tiles()
+		# wait a bit in between drops
+		await get_tree().create_timer(0.4).timeout
 
 func select_finger_swap():
 	var max_score = 0
-	var best_move = [Vector2(0, 0), Vector2(1, 0)]
+	var best_move: Array[Vector2] = [Vector2(0, 0), Vector2(1, 0)]
 	for h in $Grid2.height-1:
 		for w in $Grid2.width-1:
 			for d in 2:
@@ -45,7 +132,7 @@ func select_finger_swap():
 				var temp = type_grid[h+1-d][w+d]
 				type_grid[h+1-d][w+d] = type_grid[h][w]
 				type_grid[h][w] = temp
-				var score = estimate_score(type_grid, 9, 9)
+				var score = estimate_score(type_grid, $Grid2.width, $Grid2.height)
 				if score >= max_score:
 					max_score = score
 					best_move = [Vector2(w, h), Vector2(w+d, h+1-d)]
