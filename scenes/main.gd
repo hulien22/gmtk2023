@@ -76,7 +76,7 @@ func select_finger_swap():
 				var temp = type_grid[h+1-d][w+d]
 				type_grid[h+1-d][w+d] = type_grid[h][w]
 				type_grid[h][w] = temp
-				var score = estimate_score(type_grid, 9, 9)
+				var score = estimate_score(type_grid, $Grid2.width, $Grid2.height)
 				if score >= max_score:
 					max_score = score
 					best_move = [Vector2(w, h), Vector2(w+d, h+1-d)]
