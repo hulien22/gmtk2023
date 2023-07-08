@@ -83,6 +83,12 @@ func move(target, transformation, secs):
 	var tween: Tween = create_tween()
 	tween.tween_property(self,"position",target, secs).set_trans(transformation).set_ease(Tween.EASE_OUT)
 
+
+var sprites = [preload("res://art/fruits/apple.png"), preload("res://art/fruits/orange.png"),
+			   preload("res://art/fruits/lemon.png"), preload("res://art/fruits/pear.png"),
+			   preload("res://art/fruits/blueberry.png"), preload("res://art/fruits/grape.png")]
+var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres").duplicate(true)
+
 func destroy():
 	#play destruction animation
 #	var tween: Tween = create_tween()
@@ -93,6 +99,9 @@ func destroy():
 	timer.wait_time = $GPUParticles2D.lifetime
 	timer.one_shot = true
 	timer.connect("timeout", delete_self)
+	# TODO handle bombs specially?
+	explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
+	$GPUParticles2D.process_material = explosion_shader
 	$GPUParticles2D.emitting = true
 	timer.start()
 	# hide rest of things
