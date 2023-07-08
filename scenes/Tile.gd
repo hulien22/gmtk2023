@@ -55,6 +55,6 @@ func set_clickable(enable: bool):
 func _button_pressed():
 	Events.emit_signal("move_player_click", posn)
 
-func move(target, transformation):
+func move(target, transformation, secs):
 	var tween: Tween = create_tween()
-	tween.tween_property(self,"position",target, 0.3).set_trans(transformation).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self,"position",target, secs).set_trans(transformation).set_ease(Tween.EASE_OUT)

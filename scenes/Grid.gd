@@ -127,8 +127,8 @@ func swap_tiles(a:Vector2, b:Vector2, do_move:bool):
 	tiles[b.y][b.x].posn = Vector2(b.x,b.y)
 	
 	if do_move:
-		tiles[a.y][a.x].move(posn_from_grid(Vector2(a.x,a.y)), Tween.TRANS_BOUNCE)
-		tiles[b.y][b.x].move(posn_from_grid(Vector2(b.x,b.y)), Tween.TRANS_BOUNCE)
+		tiles[a.y][a.x].move(posn_from_grid(Vector2(a.x,a.y)), Tween.TRANS_BOUNCE, 0.3)
+		tiles[b.y][b.x].move(posn_from_grid(Vector2(b.x,b.y)), Tween.TRANS_BOUNCE, 0.3)
 #	tiles[a.y][a.x].move(tile_b.position)
 #	tiles[b.y][b.x].move(tile_a_position)
 
@@ -173,7 +173,7 @@ func drop_tiles():
 
 	for h in height:
 		for w in width:
-			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_QUAD)
+			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_ELASTIC, 0.5)
 
 func remove_deleted_tiles():
 	pass
