@@ -87,6 +87,9 @@ func check_for_matches():
 				matches_row += 1
 		print("col matches: ", matches_col, "row matches: ", matches_row)
 	
+	if (matches.size() > 0):
+		_debug_log_grid()
+	
 	# Delete all the nodes
 	for m in matches:
 		tiles[m.y][m.x].set_type(Global.TileType.EMPTY)
@@ -172,6 +175,7 @@ func drop_tiles():
 	for h in height:
 		for w in width:
 			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_ELASTIC, 0.5)
+	print(player_posn)
 
 func remove_deleted_tiles():
 	pass
@@ -183,3 +187,22 @@ func clone_type_grid():
 		for l in width:
 			types_grid[h].push_back(tiles[h][l].type)
 	return types_grid
+
+func _debug_log_grid():
+	for h in height:
+		var s = ""
+		for w in width:
+			match tiles[h][w].type:
+				Global.TileType.RED:
+					s += "R "
+				Global.TileType.ORANGE:
+					s += "O "
+				Global.TileType.YELLOW:
+					s += "Y "
+				Global.TileType.GREEN:
+					s += "G "
+				Global.TileType.BLUE:
+					s += "B "
+				Global.TileType.PURPLE:
+					s += "P "
+		print(s)
