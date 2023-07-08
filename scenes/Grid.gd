@@ -76,13 +76,14 @@ func check_for_matches():
 						matches.append(p)
 
 	# Go through matches to find special matches
+	# TODO also need to check color here?
 	for m in matches:
 		var matches_col = 0
 		var matches_row = 0
 		for other in matches:
-			if (other.x == m.x && abs(other.y - m.y) <= 3):
+			if (other.x == m.x && abs(other.y - m.y) < 3):
 				matches_col += 1
-			if (other.y == m.y && abs(other.x - m.x) <= 3):
+			if (other.y == m.y && abs(other.x - m.x) < 3):
 				matches_row += 1
 		print("col matches: ", matches_col, "row matches: ", matches_row)
 	
@@ -145,3 +146,6 @@ func swap_player(swap_posn:Vector2):
 	check_for_matches()
 	
 	set_clickable_tiles()
+
+func remove_deleted_tiles():
+	pass
