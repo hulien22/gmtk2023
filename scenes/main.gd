@@ -27,12 +27,13 @@ func _on_tile_clicked(posn: Vector2):
 		can_click = false
 		$Grid2.disable_all_clickable_tiles()
 		$Grid2.swap_player(posn)
+		# use player timer to wait for the player swap to finish before doing other things
 		$PlayerMoveTimer.start()
 
 func _on_playermovetimer_timeout():
-	# check for matches
+	# check for matches (TODO move this to just the finger swap)
 	await check_loop()
-	# set back to true on animation completion
+	# set back to true on animation completion (TODO check if player time is over / max moves have been made)
 	can_click = true
 	$Grid2.set_clickable_tiles()
 
