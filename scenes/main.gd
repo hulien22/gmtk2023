@@ -116,6 +116,7 @@ func _on_playermovetimer_timeout():
 
 func check_loop():
 	while ($Grid2.check_for_matches()):
+#		await get_tree().create_timer(0.4).timeout
 		$Grid2.drop_tiles()
 		$Grid2.disable_all_clickable_tiles()
 		# wait a bit in between drops

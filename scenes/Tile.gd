@@ -8,26 +8,27 @@ var type: Global.TileType
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_is_player(false)
-	$Button.pressed.connect(self._button_pressed)
+	$Node/Button.pressed.connect(self._button_pressed)
 
 func set_type(t: Global.TileType):
 	type = t
 	match t:
 		Global.TileType.RED:
-			$ColorRect.color = Color.RED
+			$Node/ColorRect.modulate = Color.RED
 		Global.TileType.ORANGE:
-			$ColorRect.color = Color.ORANGE
+			$Node/ColorRect.modulate = Color.ORANGE
 		Global.TileType.YELLOW:
-			$ColorRect.color = Color.YELLOW
+			$Node/ColorRect.modulate = Color.YELLOW
 		Global.TileType.GREEN:
-			$ColorRect.color = Color.GREEN
+			$Node/ColorRect.modulate = Color.GREEN
 		Global.TileType.BLUE:
-			$ColorRect.color = Color.BLUE
+			$Node/ColorRect.modulate = Color.BLUE
 		Global.TileType.PURPLE:
-			$ColorRect.color = Color.PURPLE
+			$Node/ColorRect.modulate = Color.PURPLE
 		Global.TileType.EMPTY:
 			# explode and delete?
-			visible = false
+#			visible = false
+			pass
 
 func copy_from(tile):
 	#posn = tile.posn
@@ -42,15 +43,15 @@ func _process(delta):
 func set_is_player(enable:bool):
 	is_player = enable
 	if (is_player):
-		$PlayerFace.visible = true
+		$Node/PlayerFace.visible = true
 	else:
-		$PlayerFace.visible = false
+		$Node/PlayerFace.visible = false
 
 func set_clickable(enable: bool):
 	#print(posn, enable)
-	$Button.visible = enable
-	$RichTextLabel.clear()
-	$RichTextLabel.add_text(str(posn))
+	$Node/Button.visible = enable
+	$Node/RichTextLabel.clear()
+	$Node/RichTextLabel.add_text(str(posn))
 
 func _button_pressed():
 	Events.emit_signal("move_player_click", posn)
@@ -58,3 +59,23 @@ func _button_pressed():
 func move(target, transformation, secs):
 	var tween: Tween = create_tween()
 	tween.tween_property(self,"position",target, secs).set_trans(transformation).set_ease(Tween.EASE_OUT)
+
+func destroy():
+	#play destruction animation
+#	var tween: Tween = create_tween()
+#	tween.connect("finished", delete_self)
+#	tween.tween_property(self,"position",Vector2(position.x, position.y + 100), 3).set_trans(Tween.TRANS_QUAD)
+	var timer := Timer.new()
+	add_child(timer)
+	timer.wait_time = $GPUParticles2D.lifetime
+	timer.one_shot = true
+	timer.connect("timeout", delete_self)
+	$GPUParticles2D.emitting = true
+	timer.start()
+	# hide rest of things
+	$Node.visible = false
+
+func delete_self():
+	print("delete_self")
+	queue_free()
+	

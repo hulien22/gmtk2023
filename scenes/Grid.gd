@@ -92,7 +92,9 @@ func check_for_matches():
 	
 	# Delete all the nodes
 	for m in matches:
+		tiles[m.y][m.x].destroy()
 		tiles[m.y][m.x].set_type(Global.TileType.EMPTY)
+		
 	
 	return (matches.size() > 0)
 
@@ -161,7 +163,8 @@ func drop_tiles():
 		for h in range(height-1, -1, -1):
 			if (tiles[h][w].type == Global.TileType.EMPTY):
 				delete_count += 1
-				tiles[h][w].queue_free()
+				# tile will delete itself after playing destruction animations?
+				# tiles[h][w].queue_free()
 			elif (delete_count > 0):
 				# swap tiles but don't actually move them yet (ie keep them in same positions on screen for now)
 				swap_tiles(Vector2(w,h), Vector2(w,h + delete_count), false)
