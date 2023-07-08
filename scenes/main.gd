@@ -131,17 +131,18 @@ func select_finger_swap():
 	# Maybe adding bombs will be enough?
 	var max_score = 0
 	var best_move: Array[Vector2] = [Vector2(0, 0), Vector2(1, 0)]
-	for h in $Grid2.height-1:
-		for w in $Grid2.width-1:
+	for h in $Grid2.height:
+		for w in $Grid2.width:
 			for d in 2:
-				var type_grid = $Grid2.clone_type_grid()
-				var temp = type_grid[h+1-d][w+d]
-				type_grid[h+1-d][w+d] = type_grid[h][w]
-				type_grid[h][w] = temp
-				var score = estimate_score(type_grid, $Grid2.width, $Grid2.height)
-				if score >= max_score:
-					max_score = score
-					best_move = [Vector2(w, h), Vector2(w+d, h+1-d)]
+				if w+d < $Grid2.width && h+1-d < $Grid2.height:
+					var type_grid = $Grid2.clone_type_grid()
+					var temp = type_grid[h+1-d][w+d]
+					type_grid[h+1-d][w+d] = type_grid[h][w]
+					type_grid[h][w] = temp
+					var score = estimate_score(type_grid, $Grid2.width, $Grid2.height)
+					if score >= max_score:
+						max_score = score
+						best_move = [Vector2(w, h), Vector2(w+d, h+1-d)]
 	if max_score == 0:
 		if $Grid2.player_posn.x > 0:
 			best_move = [$Grid2.player_posn - Vector2(1, 0), $Grid2.player_posn]
