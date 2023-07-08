@@ -1,14 +1,152 @@
-[gd_scene load_steps=7 format=3 uid="uid://br8esrrp0i7wc"]
+[gd_scene load_steps=35 format=3 uid="uid://br8esrrp0i7wc"]
 
 [ext_resource type="Script" path="res://scenes/Tile.gd" id="1_qfmx2"]
 [ext_resource type="Texture2D" uid="uid://wepn0hs13a4c" path="res://art/icon.svg" id="2_syojg"]
+[ext_resource type="Texture2D" uid="uid://cxh5pva6q3vqy" path="res://art/fruits/apple.png" id="3_2ha3m"]
 [ext_resource type="Texture2D" uid="uid://256ffxfyywi3" path="res://art/Pixel.png" id="3_o0d2q"]
+[ext_resource type="Texture2D" uid="uid://cl04rjaed4hnf" path="res://art/fruits/orange.png" id="4_e5dwx"]
+[ext_resource type="Texture2D" uid="uid://ca2biyd7b0r1u" path="res://art/fruits/lemon.png" id="5_j3lrd"]
+[ext_resource type="Texture2D" uid="uid://md1ewu6rt0t4" path="res://art/fruits/pear.png" id="6_l561f"]
+[ext_resource type="Texture2D" uid="uid://dyept55xdae20" path="res://art/fruits/blueberry.png" id="7_n86oq"]
+[ext_resource type="Texture2D" uid="uid://dn0375twkqlwk" path="res://art/fruits/grape.png" id="8_l5um6"]
+[ext_resource type="Texture2D" uid="uid://r4k0q01itku4" path="res://art/fruits/apple__destroyer.png" id="9_kk86r"]
+[ext_resource type="Texture2D" uid="uid://dv5t37eu8ss2l" path="res://art/fruits/orange__destroyer.png" id="10_f7iw6"]
+[ext_resource type="Texture2D" uid="uid://bmyqr6pb6mkxp" path="res://art/fruits/lemon__destroyer.png" id="11_kouhu"]
+[ext_resource type="Texture2D" uid="uid://ch0tm023lrtso" path="res://art/fruits/pear__destroyer.png" id="12_o1jyh"]
+[ext_resource type="Texture2D" uid="uid://bx8b1x0ejdfhv" path="res://art/fruits/blueberry_destroyer.png" id="13_lujq8"]
+[ext_resource type="Texture2D" uid="uid://2tqspdfeoehw" path="res://art/fruits/grape__destroyer.png" id="14_way1m"]
+[ext_resource type="Texture2D" uid="uid://brm0vr4w22p1r" path="res://art/fruits/apple_explode.png" id="15_0ohlv"]
+[ext_resource type="Texture2D" uid="uid://7m7fl7suggxf" path="res://art/fruits/orange_explode.png" id="16_6g05i"]
+[ext_resource type="Texture2D" uid="uid://4x3tvls6kk15" path="res://art/fruits/lemon_explode.png" id="17_4r1fs"]
+[ext_resource type="Texture2D" uid="uid://lecda8wvmev8" path="res://art/fruits/pear_explode.png" id="18_xoj81"]
+[ext_resource type="Texture2D" uid="uid://vaqekofg073i" path="res://art/fruits/blueberry_explode.png" id="19_vtvmt"]
+[ext_resource type="Texture2D" uid="uid://6f78a5co83u5" path="res://art/fruits/grape_explode.png" id="20_or0x6"]
+[ext_resource type="Texture2D" uid="uid://c1gr86w6jjnpf" path="res://art/fruits/apple_horizontal.png" id="21_7ql1w"]
+[ext_resource type="Texture2D" uid="uid://coslycxgxh1c4" path="res://art/fruits/lemon_horizontal.png" id="22_s83rf"]
+[ext_resource type="Texture2D" uid="uid://dcv66y1qvsnpg" path="res://art/fruits/pear_horizontal.png" id="23_abgyn"]
+[ext_resource type="Texture2D" uid="uid://lbrmmv82kjdd" path="res://art/fruits/blueberry_horizontal.png" id="24_ewh0s"]
+[ext_resource type="Texture2D" uid="uid://mxftvto0wo43" path="res://art/fruits/grape_horizontal.png" id="25_mdbr2"]
+[ext_resource type="Texture2D" uid="uid://dbwkuo11y6xg3" path="res://art/fruits/apple_vertical.png" id="26_rshcd"]
+[ext_resource type="Texture2D" uid="uid://x30xhkab5ejy" path="res://art/fruits/lemon_vertical.png" id="27_at3qo"]
+[ext_resource type="Texture2D" uid="uid://4pbfa0ua5sj6" path="res://art/fruits/pear_vertical.png" id="28_872f0"]
+[ext_resource type="Texture2D" uid="uid://c2f8yhe4oy4vs" path="res://art/fruits/blueberry_vertical.png" id="29_o2sc3"]
+[ext_resource type="Texture2D" uid="uid://lckbate3aay8" path="res://art/fruits/grape_vertical.png" id="30_yx2e8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_in7oa"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_kk86r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f7iw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_kouhu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_o1jyh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_lujq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_way1m")
+}],
 "loop": true,
-"name": &"DefaultTiles",
+"name": &"DestroyerBomb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2ha3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e5dwx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_j3lrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_l561f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_n86oq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_l5um6")
+}],
+"loop": true,
+"name": &"Fruit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_0ohlv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_6g05i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_4r1fs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_xoj81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_vtvmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_or0x6")
+}],
+"loop": true,
+"name": &"FruitBomb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_7ql1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_7ql1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_s83rf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_abgyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ewh0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_mdbr2")
+}],
+"loop": true,
+"name": &"HorizontalBomb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_rshcd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_rshcd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_at3qo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_872f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_o2sc3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_yx2e8")
+}],
+"loop": true,
+"name": &"VerticalBomb",
 "speed": 5.0
 }]
 
@@ -302,9 +440,12 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node"]
+[node name="Sprites" type="AnimatedSprite2D" parent="Node"]
+position = Vector2(-7.62939e-06, -7.62939e-06)
+scale = Vector2(0.345455, 0.345455)
 sprite_frames = SubResource("SpriteFrames_in7oa")
-animation = &"DefaultTiles"
+animation = &"Fruit"
+frame_progress = 0.354811
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
