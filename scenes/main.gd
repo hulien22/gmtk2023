@@ -25,15 +25,24 @@ func _on_tile_clicked(posn: Vector2):
 		print("Click from posn ", posn)
 		#perform the swap now
 		can_click = false
+		$Grid2.disable_all_clickable_tiles()
 		$Grid2.swap_player(posn)
 		$PlayerMoveTimer.start()
 
 func _on_playermovetimer_timeout():
 	# check for matches
-	$Grid2.check_for_matches()
-	$Grid2.set_clickable_tiles()
-	# set back to true on animation completion?
+	await check_loop()
+	# set back to true on animation completion
 	can_click = true
+	$Grid2.set_clickable_tiles()
+
+func check_loop():
+	while ($Grid2.check_for_matches()):
+		$Grid2.drop_tiles()
+		$Grid2.disable_all_clickable_tiles()
+		# wait a bit in between drops
+		await get_tree().create_timer(0.4).timeout
+	
 
 func select_finger_swap():
 	var max_score = 0

@@ -91,7 +91,7 @@ func check_for_matches():
 	for m in matches:
 		tiles[m.y][m.x].set_type(Global.TileType.EMPTY)
 	
-	drop_tiles()
+	return (matches.size() > 0)
 
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread
@@ -110,8 +110,8 @@ func disable_all_clickable_tiles():
 			tiles[h][w].set_clickable(false)
 
 func swap_tiles(a:Vector2, b:Vector2, do_move:bool):
-	print("swapping tiles ", a, b)
-	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
+#	print("swapping tiles ", a, b)
+#	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
 #	var temp_tile_a = Tile.instantiate()
 #	temp_tile_a.copy_from(tiles[a.y][a.x])
 #	tiles[a.y][a.x].copy_from(tiles[b.y][b.x])
@@ -137,13 +137,11 @@ func swap_tiles(a:Vector2, b:Vector2, do_move:bool):
 		player_posn = b
 	elif (b == player_posn):
 		player_posn = a
-	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
+#	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
 	await get_tree().create_timer(2).timeout
 
 func swap_player(swap_posn:Vector2):
-	disable_all_clickable_tiles()
-	#Play animation?
-	
+#	disable_all_clickable_tiles()
 	swap_tiles(player_posn, swap_posn, true)
 	print(player_posn)
 
