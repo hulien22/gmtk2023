@@ -43,7 +43,6 @@ func check_loop():
 		$Grid2.disable_all_clickable_tiles()
 		# wait a bit in between drops
 		await get_tree().create_timer(0.4).timeout
-	
 
 func select_finger_swap():
 	var max_score = 0
