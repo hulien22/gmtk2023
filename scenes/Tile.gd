@@ -73,6 +73,10 @@ func set_is_player(enable:bool):
 func set_clickable(enable: bool):
 	#print(posn, enable)
 	$Node/Button.visible = enable
+	if (enable):
+		$Node/Button/AnimatedSprite2D.play()
+	else:
+		$Node/Button/AnimatedSprite2D.stop()
 	$Node/RichTextLabel.clear()
 	$Node/RichTextLabel.add_text(str(posn))
 

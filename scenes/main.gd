@@ -62,6 +62,8 @@ func start_player_turn():
 	# TODO animate the tiles or smth
 	$Swap1.position = $Grid2.global_posn_from_grid(finger_swap[0])
 	$Swap2.position = $Grid2.global_posn_from_grid(finger_swap[1])
+	$Swap1.play()
+	$Swap2.play()
 	$Swap1.visible = true
 	$Swap2.visible = true
 	print("finger will swap: ", finger_swap)
@@ -89,6 +91,8 @@ func _on_turntimer_timeout():
 func _on_fingerclick_complete():
 	$Swap1.visible = false
 	$Swap2.visible = false
+	$Swap1.stop()
+	$Swap2.stop()
 	$Grid2.swap_tiles(finger_swap[0], finger_swap[1], true)
 	$FingerMoveTimer.start()
 

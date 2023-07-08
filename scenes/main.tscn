@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cl48nlgu3crf"]
+[gd_scene load_steps=12 format=3 uid="uid://cl48nlgu3crf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_clwvd"]
 [ext_resource type="Texture2D" uid="uid://btihnq2roxvea" path="res://art/template.png" id="1_k48c2"]
@@ -8,6 +8,22 @@
 [ext_resource type="Texture2D" uid="uid://hwhwpke0enxh" path="res://art/template_colored_2.png" id="5_tdp6m"]
 [ext_resource type="PackedScene" uid="uid://c7lavaft5x26w" path="res://scenes/Finger.tscn" id="6_c17ks"]
 [ext_resource type="Texture2D" uid="uid://bcmtmyj0me6yt" path="res://art/template_colored_3.png" id="6_ufsn4"]
+[ext_resource type="Texture2D" uid="uid://ddiurxqm6pxxq" path="res://art/hand_select_1.png" id="7_x3yof"]
+[ext_resource type="Texture2D" uid="uid://tdko3ersywby" path="res://art/hand_select_2.png" id="8_1ck4k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g014k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_x3yof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1ck4k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_clwvd")
@@ -51,19 +67,17 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
-[node name="Swap1" type="ColorRect" parent="."]
-offset_left = -10.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
+[node name="Swap1" type="AnimatedSprite2D" parent="."]
+position = Vector2(243, 116)
+scale = Vector2(0.572727, 0.572727)
+sprite_frames = SubResource("SpriteFrames_g014k")
+frame_progress = 0.765407
 
-[node name="Swap2" type="ColorRect" parent="."]
-offset_left = -10.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
+[node name="Swap2" type="AnimatedSprite2D" parent="."]
+position = Vector2(171, 116)
+scale = Vector2(0.572727, 0.572727)
+sprite_frames = SubResource("SpriteFrames_g014k")
+frame_progress = 0.830006
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = 255.0
