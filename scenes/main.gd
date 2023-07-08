@@ -106,7 +106,7 @@ func end_finger_turn():
 
 func _on_tile_clicked(posn: Vector2):
 	if can_click && turn == Turn.PLAYER_TURN:
-		print("Click from posn ", posn)
+#		print("Click from posn ", posn)
 		#perform the swap now
 		can_click = false
 		$Grid2.disable_all_clickable_tiles()

@@ -118,7 +118,7 @@ func destroy(points: int):
 	# TODO special effect if this is the player object??
 
 func delete_self():
-	print("delete_self")
+#	print("delete_self")
 	queue_free()
 	
 func make_bomb():

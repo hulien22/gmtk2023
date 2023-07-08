@@ -97,6 +97,7 @@ func check_for_matches():
 				for i in c:
 					var p = m + dir*i
 					if (i == mid):
+						print("PLACING COLOR BOMB ", p)
 						tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.BOMB)
 						tiles[p.y][p.x].marked_for_destruction = true
 						tiles[p.y][p.x].placing_bomb = true
@@ -122,6 +123,7 @@ func check_for_matches():
 		if (col_count >= 3 && row_count >= 3):
 			var match_color = matches[m]
 			# Add bomb
+			print("PLACING DESTROYER BOMB ", m)
 			tiles[m.y][m.x].set_type_and_modifier(match_color, Global.Modifier.DESTROYER_OF_EIGHT_TILES)
 			tiles[m.y][m.x].marked_for_destruction = true
 			tiles[m.y][m.x].placing_bomb = true
@@ -144,6 +146,7 @@ func check_for_matches():
 			if (tiles[m.y][m.x].marked_for_destruction):
 				break
 			var c = count_matches_in_direction(m, matches, dir)
+			print("CHECKING ", m, c)
 			if (c >= 4):
 				var match_color = matches[m]
 				var mid = floor((c-1) / 2)
@@ -151,8 +154,10 @@ func check_for_matches():
 					var p = m + dir*i
 					if (i == mid):
 						if (dir == Vector2.RIGHT):
+							print("PLACING HORI BOMB ", p)
 							tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.HORIZONTAL)
 						else:
+							print("PLACING VERT BOMB ", p)
 							tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.VERTICAL)
 						tiles[p.y][p.x].marked_for_destruction = true
 						tiles[p.y][p.x].placing_bomb = true
@@ -162,17 +167,6 @@ func check_for_matches():
 					else:
 						tiles[p.y][p.x].marked_for_destruction = true
 						tiles[p.y][p.x].placing_bomb = false
-	
-	for m in matches:
-		var matches_col = 0
-		var matches_row = 0
-		for other in matches:
-			if (other.x == m.x && abs(other.y - m.y) < 3):
-				matches_col += 1
-			if (other.y == m.y && abs(other.x - m.x) < 3):
-				matches_row += 1
-		print("col matches: ", matches_col, "row matches: ", matches_row)
-	
 
 	# TODO queue the bomb destruction? store in bombs field, and have main check that and queue this?
 	while (process_one_bomb()):
@@ -189,7 +183,8 @@ func check_for_matches():
 			tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 		else:
 			tiles[m.y][m.x].make_bomb()
-		
+	
+	clear_placing_bombs()
 	
 	return (matches.size() > 0)
 
@@ -255,6 +250,11 @@ func add_to_matches_and_bombs(p: Vector2):
 		return true
 	return false
 
+func clear_placing_bombs():
+	for m in matches:
+		tiles[m.y][m.x].placing_bomb = false
+		tiles[m.y][m.x].marked_for_destruction = false
+
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread
 
@@ -309,7 +309,7 @@ func swap_tiles(a:Vector2, b:Vector2, do_move:bool):
 func swap_player(swap_posn:Vector2):
 #	disable_all_clickable_tiles()
 	swap_tiles(player_posn, swap_posn, true)
-	print(player_posn)
+#	print(player_posn)
 
 func drop_tiles():
 #	var drops_per_column:Array[int] = []
@@ -339,7 +339,7 @@ func drop_tiles():
 	for h in height:
 		for w in width:
 			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_ELASTIC, 0.5)
-	print(player_posn)
+#	print(player_posn)
 
 func remove_deleted_tiles():
 	pass
