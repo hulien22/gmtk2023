@@ -144,7 +144,7 @@
 [ext_resource type="Texture2D" uid="uid://cpbt1xqtf6eqw" path="res://art/happy/happy0014.png" id="142_t226h"]
 [ext_resource type="Texture2D" uid="uid://di380ksxab1pk" path="res://art/happy/happy0015.png" id="143_ai5t5"]
 [ext_resource type="Texture2D" uid="uid://cf0jirvcme0g8" path="res://art/happy/happy0016.png" id="144_duy8a"]
-[ext_resource type="Material" uid="uid://p4s4mvv41hsl" path="res://shaders/explosion.tres" id="145_rtvyv"]
+[ext_resource type="Material" uid="uid://bkm332ouk2ukd" path="res://shaders/explosion_material.tres" id="145_pnibw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_in7oa"]
 animations = [{
@@ -722,7 +722,7 @@ z_index = 100
 z_as_relative = false
 emitting = false
 amount = 2000
-process_material = ExtResource("145_rtvyv")
+process_material = ExtResource("145_pnibw")
 texture = ExtResource("3_o0d2q")
 lifetime = 0.6
 one_shot = true
