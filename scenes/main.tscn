@@ -24,3 +24,7 @@ texture = ExtResource("4_josl6")
 position = Vector2(282, 209)
 tile_spread = 54.04
 tile_size = 1.2
+
+[node name="TurnTimer" type="Timer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
