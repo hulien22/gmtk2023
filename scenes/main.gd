@@ -123,7 +123,10 @@ func _on_playermovetimer_timeout():
 		$Grid2.set_clickable_tiles()
 
 func check_loop():
+	var cascades = -1
 	while ($Grid2.check_for_matches()):
+		cascades += 1
+		AudioAutoload.play_pop(cascades)
 #		await get_tree().create_timer(0.4).timeout
 		$Grid2.drop_tiles()
 		$Grid2.disable_all_clickable_tiles()
