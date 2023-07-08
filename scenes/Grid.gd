@@ -91,7 +91,7 @@ func check_for_matches():
 	for m in matches:
 		tiles[m.y][m.x].set_type(Global.TileType.EMPTY)
 	
-	setup_drop_tiles()
+	drop_tiles()
 
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread
@@ -151,7 +151,7 @@ func swap_player(swap_posn:Vector2):
 	
 	set_clickable_tiles()
 
-func setup_drop_tiles():
+func drop_tiles():
 #	var drops_per_column:Array[int] = []
 	for w in width:
 #		drops_per_column.append(0)
@@ -178,3 +178,14 @@ func setup_drop_tiles():
 	for h in height:
 		for w in width:
 			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_BOUNCE)
+
+func remove_deleted_tiles():
+	pass
+	
+func clone_type_grid():
+	var types_grid = [[]]
+	for h in height:
+		types_grid.push_back([])
+		for l in width:
+			types_grid[h].push_back(tiles[h][l].type)
+	return types_grid
