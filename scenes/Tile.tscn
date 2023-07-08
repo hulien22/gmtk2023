@@ -1,8 +1,10 @@
-[gd_scene load_steps=148 format=3 uid="uid://br8esrrp0i7wc"]
+[gd_scene load_steps=151 format=3 uid="uid://br8esrrp0i7wc"]
 
 [ext_resource type="Script" path="res://scenes/Tile.gd" id="1_qfmx2"]
+[ext_resource type="Texture2D" uid="uid://bfyeu18ktrbob" path="res://art/player_select_1.png" id="3_1ko5q"]
 [ext_resource type="Texture2D" uid="uid://cxh5pva6q3vqy" path="res://art/fruits/apple.png" id="3_2ha3m"]
 [ext_resource type="Texture2D" uid="uid://256ffxfyywi3" path="res://art/Pixel.png" id="3_o0d2q"]
+[ext_resource type="Texture2D" uid="uid://b00oei7y4in3q" path="res://art/player_select_2.png" id="4_cgdu3"]
 [ext_resource type="Texture2D" uid="uid://cl04rjaed4hnf" path="res://art/fruits/orange.png" id="4_e5dwx"]
 [ext_resource type="Texture2D" uid="uid://ca2biyd7b0r1u" path="res://art/fruits/lemon.png" id="5_j3lrd"]
 [ext_resource type="Texture2D" uid="uid://md1ewu6rt0t4" path="res://art/fruits/pear.png" id="6_l561f"]
@@ -145,6 +147,20 @@
 [ext_resource type="Texture2D" uid="uid://di380ksxab1pk" path="res://art/happy/happy0015.png" id="143_ai5t5"]
 [ext_resource type="Texture2D" uid="uid://cf0jirvcme0g8" path="res://art/happy/happy0016.png" id="144_duy8a"]
 [ext_resource type="Material" uid="uid://bkm332ouk2ukd" path="res://shaders/explosion_material.tres" id="145_pnibw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7n0o6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1ko5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cgdu3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_in7oa"]
 animations = [{
@@ -700,10 +716,17 @@ offset_right = 20.0
 offset_bottom = 20.0
 
 [node name="Button" type="Button" parent="Node"]
+self_modulate = Color(1, 1, 1, 0.164706)
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node/Button"]
+position = Vector2(20, 20)
+scale = Vector2(0.463636, 0.463636)
+sprite_frames = SubResource("SpriteFrames_7n0o6")
+frame_progress = 0.516204
 
 [node name="Sprites" type="AnimatedSprite2D" parent="Node"]
 position = Vector2(-7.62939e-06, -7.62939e-06)
