@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://br8esrrp0i7wc"]
+[gd_scene load_steps=37 format=3 uid="uid://br8esrrp0i7wc"]
 
 [ext_resource type="Script" path="res://scenes/Tile.gd" id="1_qfmx2"]
 [ext_resource type="Texture2D" uid="uid://wepn0hs13a4c" path="res://art/icon.svg" id="2_syojg"]
@@ -22,12 +22,14 @@
 [ext_resource type="Texture2D" uid="uid://vaqekofg073i" path="res://art/fruits/blueberry_explode.png" id="19_vtvmt"]
 [ext_resource type="Texture2D" uid="uid://6f78a5co83u5" path="res://art/fruits/grape_explode.png" id="20_or0x6"]
 [ext_resource type="Texture2D" uid="uid://c1gr86w6jjnpf" path="res://art/fruits/apple_horizontal.png" id="21_7ql1w"]
+[ext_resource type="Texture2D" uid="uid://dp88eqidydtk4" path="res://art/fruits/orange_horizontal.png" id="22_fumpr"]
 [ext_resource type="Texture2D" uid="uid://coslycxgxh1c4" path="res://art/fruits/lemon_horizontal.png" id="22_s83rf"]
 [ext_resource type="Texture2D" uid="uid://dcv66y1qvsnpg" path="res://art/fruits/pear_horizontal.png" id="23_abgyn"]
 [ext_resource type="Texture2D" uid="uid://lbrmmv82kjdd" path="res://art/fruits/blueberry_horizontal.png" id="24_ewh0s"]
 [ext_resource type="Texture2D" uid="uid://mxftvto0wo43" path="res://art/fruits/grape_horizontal.png" id="25_mdbr2"]
 [ext_resource type="Texture2D" uid="uid://dbwkuo11y6xg3" path="res://art/fruits/apple_vertical.png" id="26_rshcd"]
 [ext_resource type="Texture2D" uid="uid://x30xhkab5ejy" path="res://art/fruits/lemon_vertical.png" id="27_at3qo"]
+[ext_resource type="Texture2D" uid="uid://bspw6uk307f7h" path="res://art/fruits/orange_vertical.png" id="28_7y0nk"]
 [ext_resource type="Texture2D" uid="uid://4pbfa0ua5sj6" path="res://art/fruits/pear_vertical.png" id="28_872f0"]
 [ext_resource type="Texture2D" uid="uid://c2f8yhe4oy4vs" path="res://art/fruits/blueberry_vertical.png" id="29_o2sc3"]
 [ext_resource type="Texture2D" uid="uid://lckbate3aay8" path="res://art/fruits/grape_vertical.png" id="30_yx2e8"]
@@ -108,7 +110,7 @@ animations = [{
 "texture": ExtResource("21_7ql1w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("21_7ql1w")
+"texture": ExtResource("22_fumpr")
 }, {
 "duration": 1.0,
 "texture": ExtResource("22_s83rf")
@@ -131,7 +133,7 @@ animations = [{
 "texture": ExtResource("26_rshcd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("26_rshcd")
+"texture": ExtResource("28_7y0nk")
 }, {
 "duration": 1.0,
 "texture": ExtResource("27_at3qo")
@@ -411,6 +413,7 @@ script = ExtResource("1_qfmx2")
 [node name="Node" type="Node2D" parent="."]
 
 [node name="ColorRect-old" type="ColorRect" parent="Node"]
+visible = false
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
@@ -418,6 +421,7 @@ offset_bottom = 20.0
 color = Color(0.921569, 0, 0.678431, 0.580392)
 
 [node name="ColorRect" type="Sprite2D" parent="Node"]
+visible = false
 position = Vector2(-1.90735e-06, 0)
 scale = Vector2(40, 40)
 texture = ExtResource("3_o0d2q")
@@ -429,6 +433,7 @@ offset_right = 9.0
 offset_bottom = 9.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Node"]
+visible = false
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
@@ -444,8 +449,7 @@ offset_bottom = 20.0
 position = Vector2(-7.62939e-06, -7.62939e-06)
 scale = Vector2(0.345455, 0.345455)
 sprite_frames = SubResource("SpriteFrames_in7oa")
-animation = &"Fruit"
-frame_progress = 0.354811
+animation = &"DestroyerBomb"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
