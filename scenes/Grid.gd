@@ -146,10 +146,6 @@ func swap_player(swap_posn:Vector2):
 	
 	swap_tiles(player_posn, swap_posn, true)
 	print(player_posn)
-	# check for matches
-	check_for_matches()
-	
-	set_clickable_tiles()
 
 func drop_tiles():
 #	var drops_per_column:Array[int] = []
@@ -177,7 +173,7 @@ func drop_tiles():
 
 	for h in height:
 		for w in width:
-			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_BOUNCE)
+			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_QUAD)
 
 func remove_deleted_tiles():
 	pass

@@ -27,4 +27,6 @@ tile_size = 1.2
 
 [node name="TurnTimer" type="Timer" parent="."]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="PlayerMoveTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
