@@ -121,3 +121,5 @@ func delete_self():
 	print("delete_self")
 	queue_free()
 	
+func make_bomb():
+	pass

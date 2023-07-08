@@ -96,14 +96,15 @@ func check_for_matches():
 
 	# Go through matches to find special matches
 		# USE marked_for_destruction as marker if already processed for a bomb
-	# 1. First check for long stretches 5+
+	###
+	# First check for long stretches 6+
 	# search right then down
 	for m in ordered_matches:
 		for dir in [Vector2.RIGHT, Vector2.DOWN]:
 			if (tiles[m.y][m.x].marked_for_destruction):
 				break
 			var c = count_matches_in_direction(m, matches, dir)
-			if (c >= 5):
+			if (c >= 6):
 				var match_color = matches[m]
 				var mid = floor((c-1) / 2)
 				for i in c:
@@ -120,7 +121,60 @@ func check_for_matches():
 #						matches.erase(p)
 						tiles[p.y][p.x].marked_for_destruction = true
 						tiles[p.y][p.x].placing_bomb = false
-	
+	###
+	# Second, check for Ts / Ls
+	for m in ordered_matches:
+		if (tiles[m.y][m.x].marked_for_destruction):
+			continue
+		var count_up = count_matches_in_direction(m, matches, Vector2.UP)
+		var count_down = count_matches_in_direction(m, matches, Vector2.DOWN)
+		var count_left = count_matches_in_direction(m, matches, Vector2.LEFT)
+		var count_right = count_matches_in_direction(m, matches, Vector2.RIGHT)
+		var col_count = count_up + count_down
+		var row_count = count_left + count_right
+		if (col_count >= 3 && row_count >= 3):
+			var match_color = matches[m]
+			# Add bomb
+			tiles[m.y][m.x].set_type_and_modifier(match_color, Global.Modifier.DESTROYER_OF_EIGHT_TILES)
+			tiles[m.y][m.x].marked_for_destruction = true
+			tiles[m.y][m.x].placing_bomb = true
+			tiles[m.y][m.x].endpoints.clear()
+			# Remove other tiles
+			var counts = [count_up, count_down, count_left, count_right]
+			var dirs = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+			for x in 4:
+				for i in range(1, counts[x]):
+					var p = m + dirs[x]*i
+					tiles[p.y][p.x].marked_for_destruction = true
+					tiles[p.y][p.x].placing_bomb = false
+				if (counts[x] > 1):
+					tiles[m.y][m.x].endpoints.append(m + dirs[x] * (counts[x] - 1))
+	###
+	# Third, check for remaining long rows
+	# (same code as for 6+)
+	for m in ordered_matches:
+		for dir in [Vector2.RIGHT, Vector2.DOWN]:
+			if (tiles[m.y][m.x].marked_for_destruction):
+				break
+			var c = count_matches_in_direction(m, matches, dir)
+			if (c >= 4):
+				var match_color = matches[m]
+				var mid = floor((c-1) / 2)
+				for i in c:
+					var p = m + dir*i
+					if (i == mid):
+						if (dir == Vector2.RIGHT):
+							tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.HORIZONTAL)
+						else:
+							tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.VERTICAL)
+						tiles[p.y][p.x].marked_for_destruction = true
+						tiles[p.y][p.x].placing_bomb = true
+						tiles[p.y][p.x].endpoints.clear()
+						tiles[p.y][p.x].endpoints.append(m)
+						tiles[p.y][p.x].endpoints.append(m + dir * (c - 1))
+					else:
+						tiles[p.y][p.x].marked_for_destruction = true
+						tiles[p.y][p.x].placing_bomb = false
 	
 	for m in matches:
 		var matches_col = 0
@@ -141,6 +195,7 @@ func check_for_matches():
 			for h in height:
 				for w in width:
 					var p = tiles[h][w].posn
+					# Only add in new tiles, so don't need to worry about new bombs (still in matches)
 					if (tiles[h][w].type == bomb.tile_type && !matches.has(p)):
 						# Add to list to get destroyed
 						matches[p] = bomb.tile_type
@@ -153,6 +208,7 @@ func check_for_matches():
 								tile_type = tiles[h][w].type,
 								tile = tiles[h][w]
 							})
+			
 			
 			
 			
@@ -170,6 +226,8 @@ func check_for_matches():
 		if (!tiles[m.y][m.x].placing_bomb):
 			tiles[m.y][m.x].destroy(20)
 			tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
+		else:
+			tiles[m.y][m.x].make_bomb()
 		
 	
 	return (matches.size() > 0)
@@ -180,7 +238,10 @@ func count_matches_in_direction(posn:Vector2, dict:Dictionary, dir:Vector2):
 		return 0
 	var count = 1;
 	while (true):
-		var c = dict.get(posn + dir*count)
+		var p = posn + dir*count
+		if tiles[p.y][p.x].marked_for_destruction:
+			break
+		var c = dict.get(p)
 		if (c == match_color):
 			count += 1
 		else:
