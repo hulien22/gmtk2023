@@ -90,6 +90,8 @@ func check_for_matches():
 	# Delete all the nodes
 	for m in matches:
 		tiles[m.y][m.x].set_type(Global.TileType.EMPTY)
+	
+	return (matches.size() > 0)
 
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread
@@ -107,9 +109,9 @@ func disable_all_clickable_tiles():
 		for w in width:
 			tiles[h][w].set_clickable(false)
 
-func swap_tiles(a:Vector2, b:Vector2):
-	print("swapping tiles ", a, b)
-	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
+func swap_tiles(a:Vector2, b:Vector2, do_move:bool):
+#	print("swapping tiles ", a, b)
+#	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
 #	var temp_tile_a = Tile.instantiate()
 #	temp_tile_a.copy_from(tiles[a.y][a.x])
 #	tiles[a.y][a.x].copy_from(tiles[b.y][b.x])
@@ -124,8 +126,9 @@ func swap_tiles(a:Vector2, b:Vector2):
 	tiles[a.y][a.x].posn = Vector2(a.x,a.y)
 	tiles[b.y][b.x].posn = Vector2(b.x,b.y)
 	
-	tiles[a.y][a.x].move(posn_from_grid(Vector2(a.x,a.y)))
-	tiles[b.y][b.x].move(posn_from_grid(Vector2(b.x,b.y)))
+	if do_move:
+		tiles[a.y][a.x].move(posn_from_grid(Vector2(a.x,a.y)), Tween.TRANS_BOUNCE, 0.3)
+		tiles[b.y][b.x].move(posn_from_grid(Vector2(b.x,b.y)), Tween.TRANS_BOUNCE, 0.3)
 #	tiles[a.y][a.x].move(tile_b.position)
 #	tiles[b.y][b.x].move(tile_a_position)
 
@@ -134,18 +137,41 @@ func swap_tiles(a:Vector2, b:Vector2):
 		player_posn = b
 	elif (b == player_posn):
 		player_posn = a
-	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
+#	print(tiles[a.y][a.x].position, tiles[b.y][b.x].position)
+	await get_tree().create_timer(2).timeout
 
 func swap_player(swap_posn:Vector2):
-	disable_all_clickable_tiles()
-	#Play animation?
-	
-	swap_tiles(player_posn, swap_posn)
+#	disable_all_clickable_tiles()
+	swap_tiles(player_posn, swap_posn, true)
 	print(player_posn)
-	# check for matches
-	check_for_matches()
-	
-	set_clickable_tiles()
+
+func drop_tiles():
+#	var drops_per_column:Array[int] = []
+	for w in width:
+#		drops_per_column.append(0)
+		var delete_count = 0
+		# start from the bottom and go up
+		for h in range(height-1, -1, -1):
+			if (tiles[h][w].type == Global.TileType.EMPTY):
+				delete_count += 1
+				tiles[h][w].queue_free()
+			elif (delete_count > 0):
+				# swap tiles but don't actually move them yet (ie keep them in same positions on screen for now)
+				swap_tiles(Vector2(w,h), Vector2(w,h + delete_count), false)
+		for i in delete_count:
+			# add in new node above
+			var new_tile = Tile.instantiate()
+			new_tile.posn = Vector2(w, delete_count - i - 1)
+			new_tile.position = posn_from_grid(Vector2(w, 0 - i - 1))
+			new_tile.scale = Vector2(tile_size, tile_size)
+			var color = Global.get_random_color()
+			new_tile.set_type(color)
+			add_child(new_tile)
+			tiles[delete_count - i - 1][w] = new_tile
+
+	for h in height:
+		for w in width:
+			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_ELASTIC, 0.5)
 
 func remove_deleted_tiles():
 	pass
