@@ -149,3 +149,11 @@ func swap_player(swap_posn:Vector2):
 
 func remove_deleted_tiles():
 	pass
+	
+func clone_type_grid():
+	var types_grid = [[]]
+	for h in height:
+		types_grid.push_back([])
+		for l in width:
+			types_grid[h].push_back(tiles[h][l].type)
+	return types_grid
