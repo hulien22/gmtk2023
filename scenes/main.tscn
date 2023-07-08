@@ -1,12 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl48nlgu3crf"]
+[gd_scene load_steps=7 format=3 uid="uid://cl48nlgu3crf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_clwvd"]
 [ext_resource type="Texture2D" uid="uid://btihnq2roxvea" path="res://art/template.png" id="1_k48c2"]
 [ext_resource type="PackedScene" uid="uid://dnwfr8rhfk5st" path="res://scenes/Grid.tscn" id="2_tq8kh"]
 [ext_resource type="Texture2D" uid="uid://dix8lgvg4b460" path="res://art/template_colored.png" id="4_josl6"]
+[ext_resource type="Script" path="res://scenes/TimerBar.gd" id="5_7i0ym"]
+[ext_resource type="PackedScene" uid="uid://c7lavaft5x26w" path="res://scenes/Finger.tscn" id="6_c17ks"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_clwvd")
+timer_decay = 0.5
 
 [node name="Template" type="Sprite2D" parent="."]
 position = Vector2(639, 359)
@@ -26,7 +29,39 @@ tile_spread = 54.04
 tile_size = 1.2
 
 [node name="TurnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
 
 [node name="PlayerMoveTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="FingerMoveTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Swap1" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="Swap2" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 255.0
+offset_top = 673.0
+offset_right = 745.0
+offset_bottom = 700.0
+show_percentage = false
+script = ExtResource("5_7i0ym")
+
+[node name="Finger" parent="." instance=ExtResource("6_c17ks")]
+position = Vector2(17, 48)
+scale = Vector2(0.28, 0.28)

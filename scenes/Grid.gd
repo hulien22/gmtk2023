@@ -99,6 +99,9 @@ func check_for_matches():
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread
 
+func global_posn_from_grid(grid:Vector2):
+	return (grid * tile_spread) + global_position
+
 func set_clickable_tiles():
 	for h in height:
 		for w in width:
