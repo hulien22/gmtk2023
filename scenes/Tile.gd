@@ -159,6 +159,23 @@ func destroy():
 func delete_self():
 #	print("delete_self")
 	queue_free()
-	
+
+var simple_fruit: PackedScene = preload("res://scenes/simple_fruit.tscn")
+var bomb_spawn: PackedScene = preload("res://scenes/bomb_spawn_anim.tscn")
 func make_bomb():
+	for p in endpoints:
+		var f = simple_fruit.instantiate()
+		f.setup(type, global_position)
+		f.visible = false
+		add_child(f)
+		f.global_position = p
+		f.visible = true
+		f.animate()
+	var b = bomb_spawn.instantiate()
+	b.setup(type, modifier)
+	b.visible = false
+	add_child(b)
+	b.global_position = global_position
+	b.visible = true
+	
 	$Node.visible = true

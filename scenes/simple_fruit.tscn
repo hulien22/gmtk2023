@@ -1,0 +1,160 @@
+[gd_scene load_steps=33 format=3 uid="uid://buorowvx0kxnq"]
+
+[ext_resource type="Texture2D" uid="uid://r4k0q01itku4" path="res://art/fruits/apple__destroyer.png" id="1_sagjg"]
+[ext_resource type="Script" path="res://scenes/simple_fruit.gd" id="1_wpsr4"]
+[ext_resource type="Texture2D" uid="uid://dv5t37eu8ss2l" path="res://art/fruits/orange__destroyer.png" id="2_xqslk"]
+[ext_resource type="Texture2D" uid="uid://bmyqr6pb6mkxp" path="res://art/fruits/lemon__destroyer.png" id="3_n68pf"]
+[ext_resource type="Texture2D" uid="uid://ch0tm023lrtso" path="res://art/fruits/pear__destroyer.png" id="4_k6vbh"]
+[ext_resource type="Texture2D" uid="uid://bx8b1x0ejdfhv" path="res://art/fruits/blueberry_destroyer.png" id="5_5yk1j"]
+[ext_resource type="Texture2D" uid="uid://2tqspdfeoehw" path="res://art/fruits/grape__destroyer.png" id="6_8qtlp"]
+[ext_resource type="Texture2D" uid="uid://cxh5pva6q3vqy" path="res://art/fruits/apple.png" id="7_inib1"]
+[ext_resource type="Texture2D" uid="uid://cl04rjaed4hnf" path="res://art/fruits/orange.png" id="8_mjsmm"]
+[ext_resource type="Texture2D" uid="uid://ca2biyd7b0r1u" path="res://art/fruits/lemon.png" id="9_xc1e1"]
+[ext_resource type="Texture2D" uid="uid://md1ewu6rt0t4" path="res://art/fruits/pear.png" id="10_gpucw"]
+[ext_resource type="Texture2D" uid="uid://dyept55xdae20" path="res://art/fruits/blueberry.png" id="11_j6e51"]
+[ext_resource type="Texture2D" uid="uid://dn0375twkqlwk" path="res://art/fruits/grape.png" id="12_l2mc1"]
+[ext_resource type="Texture2D" uid="uid://brm0vr4w22p1r" path="res://art/fruits/apple_explode.png" id="13_ngsvv"]
+[ext_resource type="Texture2D" uid="uid://7m7fl7suggxf" path="res://art/fruits/orange_explode.png" id="14_73bw8"]
+[ext_resource type="Texture2D" uid="uid://4x3tvls6kk15" path="res://art/fruits/lemon_explode.png" id="15_qdhi8"]
+[ext_resource type="Texture2D" uid="uid://lecda8wvmev8" path="res://art/fruits/pear_explode.png" id="16_0dinh"]
+[ext_resource type="Texture2D" uid="uid://vaqekofg073i" path="res://art/fruits/blueberry_explode.png" id="17_4ae2j"]
+[ext_resource type="Texture2D" uid="uid://6f78a5co83u5" path="res://art/fruits/grape_explode.png" id="18_1d5f1"]
+[ext_resource type="Texture2D" uid="uid://c1gr86w6jjnpf" path="res://art/fruits/apple_horizontal.png" id="19_l8mkj"]
+[ext_resource type="Texture2D" uid="uid://dp88eqidydtk4" path="res://art/fruits/orange_horizontal.png" id="20_o7o5h"]
+[ext_resource type="Texture2D" uid="uid://coslycxgxh1c4" path="res://art/fruits/lemon_horizontal.png" id="21_5dymy"]
+[ext_resource type="Texture2D" uid="uid://dcv66y1qvsnpg" path="res://art/fruits/pear_horizontal.png" id="22_7js03"]
+[ext_resource type="Texture2D" uid="uid://lbrmmv82kjdd" path="res://art/fruits/blueberry_horizontal.png" id="23_dja1t"]
+[ext_resource type="Texture2D" uid="uid://mxftvto0wo43" path="res://art/fruits/grape_horizontal.png" id="24_31w81"]
+[ext_resource type="Texture2D" uid="uid://dbwkuo11y6xg3" path="res://art/fruits/apple_vertical.png" id="25_rlro5"]
+[ext_resource type="Texture2D" uid="uid://bspw6uk307f7h" path="res://art/fruits/orange_vertical.png" id="26_6g650"]
+[ext_resource type="Texture2D" uid="uid://x30xhkab5ejy" path="res://art/fruits/lemon_vertical.png" id="27_m7c1x"]
+[ext_resource type="Texture2D" uid="uid://4pbfa0ua5sj6" path="res://art/fruits/pear_vertical.png" id="28_c6yty"]
+[ext_resource type="Texture2D" uid="uid://c2f8yhe4oy4vs" path="res://art/fruits/blueberry_vertical.png" id="29_85sij"]
+[ext_resource type="Texture2D" uid="uid://lckbate3aay8" path="res://art/fruits/grape_vertical.png" id="30_noxkj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gsta3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sagjg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xqslk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_n68pf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k6vbh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5yk1j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8qtlp")
+}],
+"loop": true,
+"name": &"DestroyerBomb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_inib1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mjsmm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xc1e1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_gpucw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_j6e51")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_l2mc1")
+}],
+"loop": true,
+"name": &"Fruit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ngsvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_73bw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_qdhi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0dinh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_4ae2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_1d5f1")
+}],
+"loop": true,
+"name": &"FruitBomb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_l8mkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_o7o5h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_5dymy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_7js03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_dja1t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_31w81")
+}],
+"loop": true,
+"name": &"HorizontalBomb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_rlro5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_6g650")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_m7c1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_c6yty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_85sij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_noxkj")
+}],
+"loop": true,
+"name": &"VerticalBomb",
+"speed": 5.0
+}]
+
+[node name="simple_fruit" type="Node2D"]
+script = ExtResource("1_wpsr4")
+
+[node name="Sprites" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(0.345455, 0.345455)
+sprite_frames = SubResource("SpriteFrames_gsta3")
+animation = &"Fruit"

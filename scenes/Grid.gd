@@ -100,21 +100,21 @@ func check_for_matches():
 			if (c >= 6):
 				var match_color = matches[m]
 				var mid = floor((c-1) / 2)
+				var mid_p = m + dir*mid
+				tiles[mid_p.y][mid_p.x].endpoints.clear()
 				for i in c:
 					var p = m + dir*i
 					if (i == mid):
 						print("PLACING COLOR BOMB ", p)
-						tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.BOMB)
-						tiles[p.y][p.x].marked_for_destruction = true
-						tiles[p.y][p.x].placing_bomb = true
-						tiles[p.y][p.x].endpoints.clear()
-						tiles[p.y][p.x].endpoints.append(m)
-						tiles[p.y][p.x].endpoints.append(m + dir * (c - 1))
+						tiles[mid_p.y][mid_p.x].set_type_and_modifier(match_color, Global.Modifier.BOMB)
+						tiles[mid_p.y][mid_p.x].marked_for_destruction = true
+						tiles[mid_p.y][mid_p.x].placing_bomb = true
 					else:
 #						tiles[p.y][p.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 #						matches.erase(p)
 						tiles[p.y][p.x].marked_for_destruction = true
 						tiles[p.y][p.x].placing_bomb = false
+						tiles[mid_p.y][mid_p.x].endpoints.append(global_posn_from_grid(p))
 	###
 	# Second, check for Ts / Ls
 	for m in ordered_matches:
@@ -142,8 +142,7 @@ func check_for_matches():
 					var p = m + dirs[x]*i
 					tiles[p.y][p.x].marked_for_destruction = true
 					tiles[p.y][p.x].placing_bomb = false
-				if (counts[x] > 1):
-					tiles[m.y][m.x].endpoints.append(m + dirs[x] * (counts[x] - 1))
+					tiles[m.y][m.x].endpoints.append(global_posn_from_grid(p))
 	###
 	# Third, check for remaining long rows
 	# (same code as for 6+)
@@ -155,6 +154,8 @@ func check_for_matches():
 			if (c >= 4):
 				var match_color = matches[m]
 				var mid = floor((c-1) / 2)
+				var mid_p = m + dir*mid
+				tiles[mid_p.y][mid_p.x].endpoints.clear()
 				for i in c:
 					var p = m + dir*i
 					if (i == mid):
@@ -164,14 +165,12 @@ func check_for_matches():
 						else:
 							print("PLACING VERT BOMB ", p)
 							tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.VERTICAL)
-						tiles[p.y][p.x].marked_for_destruction = true
-						tiles[p.y][p.x].placing_bomb = true
-						tiles[p.y][p.x].endpoints.clear()
-						tiles[p.y][p.x].endpoints.append(m)
-						tiles[p.y][p.x].endpoints.append(m + dir * (c - 1))
+						tiles[mid_p.y][mid_p.x].marked_for_destruction = true
+						tiles[mid_p.y][mid_p.x].placing_bomb = true
 					else:
 						tiles[p.y][p.x].marked_for_destruction = true
 						tiles[p.y][p.x].placing_bomb = false
+						tiles[mid_p.y][mid_p.x].endpoints.append(global_posn_from_grid(p))
 
 #	if (matches.size() > 0):
 #		_debug_log_grid()
@@ -246,10 +245,13 @@ func add_to_matches_and_bombs(p: Vector2):
 	return false
 
 func clear_placing_bombs():
+	if placing_bombs.is_empty():
+		return false
 	for m in placing_bombs:
 		tiles[m.y][m.x].placing_bomb = false
 		tiles[m.y][m.x].marked_for_destruction = false
 		tiles[m.y][m.x].make_bomb()
+	return true
 
 func destroy_matches():
 	# Moves new matches to destroyed_matches, then plays their destroy animation
