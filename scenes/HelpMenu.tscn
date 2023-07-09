@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://7m7fl7suggxf" path="res://art/fruits/orange_explode.png" id="10_spy4e"]
 [ext_resource type="Texture2D" uid="uid://bx8b1x0ejdfhv" path="res://art/fruits/blueberry_destroyer.png" id="11_b6cux"]
 [ext_resource type="Texture2D" uid="uid://6ajmgiqqq0j0" path="res://art/menu and buttons/gameplay.png" id="12_dgdj1"]
-[ext_resource type="FontFile" uid="uid://dyc2m3qqcij64" path="res://fonts/ChalkboyRegular-vmXe7.otf" id="13_5knpp"]
+[ext_resource type="FontFile" uid="uid://xckdxrxit3gj" path="res://fonts/ChalkboyRegular-vmXe7.otf" id="13_5knpp"]
 
 [node name="HelpMenu" type="Control"]
 layout_mode = 3
@@ -222,20 +222,21 @@ stretch_mode = 0
 
 [node name="GameplayText" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 34.0
+offset_left = 14.0
 offset_top = 268.0
 offset_right = 805.0
 offset_bottom = 354.0
 theme_override_colors/default_color = Color(0.46875, 0, 0.179688, 1)
 theme_override_fonts/normal_font = ExtResource("13_5knpp")
 theme_override_font_sizes/normal_font_size = 30
-text = "Move around, swap fruits, and match atleast 3 fruit to score points. Do not get yourself matched, and watch out for the Blue Highlighted TIles the AI Player is going to swap."
+text = "Move around, swap fruits, and match at least 3 fruits to score points. 
+Avoid getting matched, and watch out for the Blue Highlighted Tiles the AI Player is going to swap."
 fit_content = true
 scroll_active = false
 
 [node name="ControlsText" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 25.0
+offset_left = 16.0
 offset_top = 145.0
 offset_right = 796.0
 offset_bottom = 182.0
