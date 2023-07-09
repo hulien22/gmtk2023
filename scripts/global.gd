@@ -74,3 +74,5 @@ func get_index_from_modifier(m: Modifier):
 			return 4
 	print_debug("unknown modifier: ", m)
 	return 0
+
+var GAME_OVER:bool = false

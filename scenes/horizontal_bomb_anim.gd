@@ -21,7 +21,7 @@ func fly_right():
 	tween2.tween_property($Sprites,"position",Vector2(1000,0), 0.1).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	
 func fly_right2():
-	$Sprites.position.x = -100
+	$Sprites.position.x = -1000
 	var tween2: Tween = create_tween()
 	tween2.connect("finished", delete_self)
 	tween2.tween_property($Sprites,"position",Vector2(1000,0), 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)

@@ -709,6 +709,7 @@ offset_right = 9.0
 offset_bottom = 9.0
 
 [node name="Button" type="Button" parent="Node"]
+visible = false
 self_modulate = Color(1, 1, 1, 0.164706)
 offset_left = -20.0
 offset_top = -20.0
@@ -732,7 +733,7 @@ animation = &"Fruit"
 position = Vector2(-187, -15)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_k0evb")
-animation = &"Happy"
+animation = &"Fear"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Node"]
 visible = false

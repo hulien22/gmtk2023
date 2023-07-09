@@ -15,6 +15,7 @@ var turn: Turn = Turn.PLAYER_TURN
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	Global.GAME_OVER = false
 	$Grid2.build_grid(9,9)
 	$Grid2.set_clickable_tiles()
 #	print("picked:", select_finger_swap())
@@ -102,7 +103,12 @@ func _on_fingermovetimer_timeout():
 func end_finger_turn():
 	# Perform all the matches
 	await check_loop()
-	start_player_turn()
+	
+	if Global.GAME_OVER:
+		# show game over screen
+		pass
+	else:
+		start_player_turn()
 
 func _on_tile_clicked(posn: Vector2):
 	if can_click && turn == Turn.PLAYER_TURN:
@@ -152,7 +158,6 @@ func check_loop():
 		# wait a bit in between drops
 		await get_tree().create_timer(0.7).timeout
 	if cascades > 0:
-		
 		$VoiceAnimator.play_animation(cascades-1)
 
 func select_finger_swap():
