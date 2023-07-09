@@ -19,7 +19,8 @@ func _process(_delta):
 #	var color = lerp(Color.RED, Color.GREEN, ratio)
 	var color = Color('fe4756')
 	if (ratio > 0.75):
-		color = Color('abc247') # maybe 48C247?
+#		color = Color('abc247') # maybe 48C247?
+		color = Color('48C247')
 	elif (ratio > 0.5):
 		color = Color('ebbe22')
 	elif (ratio > 0.25):

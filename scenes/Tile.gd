@@ -110,41 +110,76 @@ func play_destroy_anim(points: int, global_posn: Vector2):
 		explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
 		$GPUParticles2D.process_material = explosion_shader
 		$GPUParticles2D.emitting = true
-	elif (modifier == Global.Modifier.HORIZONTAL):
+#	elif (modifier == Global.Modifier.HORIZONTAL):
+#		var s:Node2D = explosions[0].instantiate()
+#		s.setup(type)
+#		s.z_index = 100
+#		s.visible = false
+#		get_parent().add_child(s)
+#		s.global_position = global_posn
+#		s.visible = true
+#	elif (modifier == Global.Modifier.VERTICAL):
+#		var s:Node2D = explosions[0].instantiate()
+#		s.setup(type)
+#		s.z_index = 100
+#		s.visible = false
+#		s.rotation_degrees = 270
+#		get_parent().add_child(s)
+#		s.global_position = global_posn
+#		s.visible = true
+#	elif (modifier == Global.Modifier.DESTROYER_OF_EIGHT_TILES):
+#		var s:Node2D = explosions[1].instantiate()
+#		s.setup(type)
+#		s.z_index = 100
+#		s.visible = false
+#		get_parent().add_child(s)
+#		s.global_position = global_posn
+#		s.visible = true
+#	elif (modifier == Global.Modifier.BOMB):
+#		var s:Node2D = explosions[2].instantiate()
+#		s.setup(type)
+#		s.z_index = 100
+#		s.visible = false
+#		get_parent().add_child(s)
+#		s.global_position = global_posn
+#		s.visible = true
+
+	$Node.visible = false
+
+func destroy_bomb_tile(global_posn: Vector2, t: Global.TileType, mod: Global.Modifier):
+	if (mod == Global.Modifier.HORIZONTAL):
 		var s:Node2D = explosions[0].instantiate()
-		s.setup(type)
+		s.setup(t)
 		s.z_index = 100
 		s.visible = false
 		get_parent().add_child(s)
 		s.global_position = global_posn
 		s.visible = true
-	elif (modifier == Global.Modifier.VERTICAL):
+	elif (mod == Global.Modifier.VERTICAL):
 		var s:Node2D = explosions[0].instantiate()
-		s.setup(type)
+		s.setup(t)
 		s.z_index = 100
 		s.visible = false
 		s.rotation_degrees = 270
 		get_parent().add_child(s)
 		s.global_position = global_posn
 		s.visible = true
-	elif (modifier == Global.Modifier.DESTROYER_OF_EIGHT_TILES):
+	elif (mod == Global.Modifier.DESTROYER_OF_EIGHT_TILES):
 		var s:Node2D = explosions[1].instantiate()
-		s.setup(type)
+		s.setup(t)
 		s.z_index = 100
 		s.visible = false
 		get_parent().add_child(s)
 		s.global_position = global_posn
 		s.visible = true
-	elif (modifier == Global.Modifier.BOMB):
+	elif (mod == Global.Modifier.BOMB):
 		var s:Node2D = explosions[2].instantiate()
-		s.setup(type)
+		s.setup(t)
 		s.z_index = 100
 		s.visible = false
 		get_parent().add_child(s)
 		s.global_position = global_posn
 		s.visible = true
-
-	$Node.visible = false
 
 func destroy():
 	var timer := Timer.new()

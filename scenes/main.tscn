@@ -46,6 +46,16 @@ texture = ExtResource("4_josl6")
 position = Vector2(177, 367)
 texture = ExtResource("5_tdp6m")
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 253.0
+offset_top = 669.0
+offset_right = 743.0
+offset_bottom = 696.0
+scale = Vector2(1.00707, 1.04024)
+value = 100.0
+show_percentage = false
+script = ExtResource("5_7i0ym")
+
 [node name="TemplateColored3" type="Sprite2D" parent="."]
 position = Vector2(177, 367)
 texture = ExtResource("6_ufsn4")
@@ -80,15 +90,6 @@ scale = Vector2(0.572727, 0.572727)
 sprite_frames = SubResource("SpriteFrames_g014k")
 frame_progress = 0.830006
 speed_scale = 0.5
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = 255.0
-offset_top = 673.0
-offset_right = 745.0
-offset_bottom = 700.0
-value = 100.0
-show_percentage = false
-script = ExtResource("5_7i0ym")
 
 [node name="Finger" parent="." instance=ExtResource("6_c17ks")]
 position = Vector2(844, 41)

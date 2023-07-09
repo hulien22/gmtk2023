@@ -133,12 +133,10 @@ func check_loop():
 			await get_tree().create_timer(0.3).timeout
 		while (true):
 			var bomb_time = $Grid2.process_one_bomb()
-			print(bomb_time)
-			if (bomb_time > 0):
-				await get_tree().create_timer(bomb_time).timeout
+			if (bomb_time.size() == 2):
+				await get_tree().create_timer(bomb_time[0]).timeout
 				$Grid2.destroy_matches()
-				await get_tree().create_timer(bomb_time).timeout
-				bomb_time = $Grid2.process_one_bomb()
+				await get_tree().create_timer(bomb_time[1]).timeout
 			else:
 				if $Grid2.destroy_matches():
 					await get_tree().create_timer(0.3).timeout

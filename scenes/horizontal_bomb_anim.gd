@@ -10,7 +10,7 @@ func setup(t: Global.TileType):
 func _ready():
 	var tween: Tween = create_tween()
 	tween.connect("finished", fly_right)
-	tween.tween_property($Sprites,"scale",Vector2(3,3), 0.5).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.tween_property($Sprites,"scale",Vector2(3,3), 0.3).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 
 func fly_right():
 	var tween: Tween = create_tween()

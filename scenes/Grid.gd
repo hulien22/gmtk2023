@@ -198,8 +198,10 @@ func count_matches_in_direction(posn:Vector2, dict:Dictionary, dir:Vector2):
 # return number of seconds for the bomb animation to play
 func process_one_bomb():
 	if (bombs.is_empty()):
-		return 0
+		return []
 	var bomb = bombs.pop_front()
+	print(Time.get_time_dict_from_system(), "DELETING BOMB ", bomb)
+	bomb.tile.destroy_bomb_tile(global_posn_from_grid(bomb.posn), bomb.tile_type, bomb.bomb_type)
 	if (bomb.bomb_type == Global.Modifier.BOMB):
 		#iterate through all nodes and add all of that color to list to get destroyed
 		#also keep track of any found bombs there and add them in here
@@ -209,7 +211,7 @@ func process_one_bomb():
 				# Only add in new tiles, so don't need to worry about new bombs (still in matches)
 				if (tiles[h][w].type == bomb.tile_type):
 					add_to_matches_and_bombs(p)
-		return 0.5
+		return [0.8, 0.5]
 	elif (bomb.bomb_type == Global.Modifier.DESTROYER_OF_EIGHT_TILES):
 		for dir in [Vector2(-1,-1), Vector2(-1,0), Vector2(-1,1),
 					Vector2(0,-1), Vector2(0,1),
@@ -217,7 +219,7 @@ func process_one_bomb():
 			var p = bomb.posn + dir
 			if (p.x >= 0 && p.x < width && p.y >= 0 && p.y < height):
 				add_to_matches_and_bombs(p)
-		return 0.8
+		return [0.8, 0.3]
 	elif (bomb.bomb_type == Global.Modifier.VERTICAL):
 		for i in height:
 			var p = Vector2(bomb.posn.x, i)
@@ -226,7 +228,7 @@ func process_one_bomb():
 		for i in width:
 			var p = Vector2(i, bomb.posn.y)
 			add_to_matches_and_bombs(p)
-	return 0.3
+	return [0.5, 0.3]
 
 func add_to_matches_and_bombs(p: Vector2):
 	if (!matches.has(p)):
@@ -256,8 +258,8 @@ func destroy_matches():
 	for m in matches:
 #		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 		if (!destroyed_matches.has(m)):
-			tiles[m.y][m.x].play_destroy_anim(20, global_posn_from_grid(m))
 			if (!tiles[m.y][m.x].placing_bomb):
+				tiles[m.y][m.x].play_destroy_anim(20, global_posn_from_grid(m))
 				tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 			else:
 				# mark as placing_bombs for later, will animated their creation then
