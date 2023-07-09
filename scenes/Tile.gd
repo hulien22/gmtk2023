@@ -116,7 +116,7 @@ var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res
 
 var score_effect = preload("res://scenes/score_effect.tscn")
 
-func play_destroy_anim(cascade: int, global_posn: Vector2):
+func play_destroy_anim(cascade: float, global_posn: Vector2):
 	$Node/RichTextLabel.add_text(str(cascade))
 	
 	var pts = cascade
@@ -134,6 +134,7 @@ func play_destroy_anim(cascade: int, global_posn: Vector2):
 				pts *= 60
 			Global.Modifier.BOMB:
 				pts *= 100
+	pts = floor(pts)
 	#TODO spawn score obj
 	Events.emit_signal("increase_score", pts)
 	var se = score_effect.instantiate()

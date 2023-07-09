@@ -142,14 +142,16 @@ func check_loop():
 		# TODO queue the bomb destruction? store in bombs field, and have main check that and queue this?
 		if $Grid2.destroy_matches(cascades + 1):
 			await get_tree().create_timer(0.3).timeout
+		var bomb_loop = 1
 		while (true):
 			var bomb_time = $Grid2.process_one_bomb()
 			if (bomb_time.size() == 2):
 				await get_tree().create_timer(bomb_time[0]).timeout
-				$Grid2.destroy_matches(cascades + 1)
+				$Grid2.destroy_matches(cascades + 1 + 0.2*bomb_loop)
 				await get_tree().create_timer(bomb_time[1]).timeout
+				bomb_loop += 1
 			else:
-				if $Grid2.destroy_matches(cascades + 1):
+				if $Grid2.destroy_matches(cascades + 1 + 0.2*bomb_loop):
 					await get_tree().create_timer(0.3).timeout
 				break
 		

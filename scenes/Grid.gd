@@ -265,7 +265,7 @@ func clear_placing_bombs():
 		tiles[m.y][m.x].make_bomb()
 	return true
 
-func destroy_matches(cascade: int):
+func destroy_matches(cascade: float):
 	# Moves new matches to destroyed_matches, then plays their destroy animation
 	var destroyed:bool = false
 	for m in matches:
