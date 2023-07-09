@@ -105,7 +105,12 @@ func move(target, transformation, secs):
 var sprites = [preload("res://art/fruits/apple.png"), preload("res://art/fruits/orange.png"),
 			   preload("res://art/fruits/lemon.png"), preload("res://art/fruits/pear.png"),
 			   preload("res://art/fruits/blueberry.png"), preload("res://art/fruits/grape.png")]
+
 var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres")
+
+var explosion_shaders = [preload("res://shaders/explosion_material_red.tres"), preload("res://shaders/explosion_material_orange.tres"),
+						 preload("res://shaders/explosion_material_yellow.tres"), preload("res://shaders/explosion_material_green.tres"),
+						 preload("res://shaders/explosion_material_blue.tres"), preload("res://shaders/explosion_material_purple.tres")]
 
 var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/destroyer_bomb_anim.tscn"),preload("res://scenes/color_bomb_anim.tscn")]
 
@@ -126,8 +131,8 @@ func play_destroy_anim(points: int, global_posn: Vector2):
 		$Node.visible = true
 		set_emotion("Fear")
 	elif (modifier == Global.Modifier.NONE || placing_bomb):
-		explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
-		$GPUParticles2D.process_material = explosion_shader
+#		explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
+		$GPUParticles2D.process_material = explosion_shaders[Global.get_index_from_type(type)]
 		$GPUParticles2D.emitting = true
 
 func destroy_bomb_tile(global_posn: Vector2, t: Global.TileType, mod: Global.Modifier):
