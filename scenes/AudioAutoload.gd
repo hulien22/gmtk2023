@@ -6,6 +6,7 @@ extends AudioStreamPlayer
 @export var destroyer: AudioStream
 @export var knife: AudioStream
 @export var bomb: AudioStream
+@export var die: AudioStream
 
 var music_stopped: bool = false
 
@@ -32,4 +33,9 @@ func play_voice(cascades):
 func play_destroyer():
 	if !stream_paused:
 		$SoundEffect.stream = destroyer
+		$SoundEffect.play()
+
+func play_die():
+	if !stream_paused:
+		$SoundEffect.stream = die
 		$SoundEffect.play()

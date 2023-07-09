@@ -118,6 +118,7 @@ func play_destroy_anim(points: int, global_posn: Vector2):
 	# TODO handle bombs specially?
 	$Node.visible = false
 	if (is_player):
+		AudioAutoload.play_die()
 		z_index = 1000
 		var tween: Tween = create_tween()
 		tween.connect("finished", explode_player.bind(type))
