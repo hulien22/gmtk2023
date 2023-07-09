@@ -97,16 +97,39 @@ var sprites = [preload("res://art/fruits/apple.png"), preload("res://art/fruits/
 			   preload("res://art/fruits/blueberry.png"), preload("res://art/fruits/grape.png")]
 var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres").duplicate(true)
 
-func play_destroy_anim(points: int):
+var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/horizontal_bomb_anim.tscn")]
+
+func play_destroy_anim(points: int, global_posn: Vector2):
 	$Node/RichTextLabel.add_text(str(points))
 	#play destruction animation
 #	var tween: Tween = create_tween()
 #	tween.connect("finished", delete_self)
 #	tween.tween_property(self,"position",Vector2(position.x, position.y + 100), 3).set_trans(Tween.TRANS_QUAD)
 	# TODO handle bombs specially?
-	explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
-	$GPUParticles2D.process_material = explosion_shader
-	$GPUParticles2D.emitting = true
+	if (modifier == Global.Modifier.NONE || placing_bomb):
+		explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
+		$GPUParticles2D.process_material = explosion_shader
+		$GPUParticles2D.emitting = true
+	elif (modifier == Global.Modifier.HORIZONTAL):
+		var s:Node2D = explosions[0].instantiate()
+		print(global_position, global_posn)
+		s.setup(type)
+		s.z_index = 100
+		s.visible = false
+		get_parent().add_child(s)
+		s.global_position = global_posn
+		s.visible = true
+	elif (modifier == Global.Modifier.VERTICAL):
+		var s:Node2D = explosions[0].instantiate()
+		print(global_position, global_posn)
+		s.setup(type)
+		s.z_index = 100
+		s.visible = false
+		s.rotation_degrees = 270
+		get_parent().add_child(s)
+		s.global_position = global_posn
+		s.visible = true
+
 	$Node.visible = false
 
 func destroy():

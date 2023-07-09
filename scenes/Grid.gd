@@ -173,8 +173,8 @@ func check_for_matches():
 						tiles[p.y][p.x].marked_for_destruction = true
 						tiles[p.y][p.x].placing_bomb = false
 
-	if (matches.size() > 0):
-		_debug_log_grid()
+#	if (matches.size() > 0):
+#		_debug_log_grid()
 	
 #	print(matches.size(), matches)
 	return (matches.size() > 0)
@@ -256,7 +256,7 @@ func destroy_matches():
 	for m in matches:
 #		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 		if (!destroyed_matches.has(m)):
-			tiles[m.y][m.x].play_destroy_anim(20)
+			tiles[m.y][m.x].play_destroy_anim(20, global_posn_from_grid(m))
 			if (!tiles[m.y][m.x].placing_bomb):
 				tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 			else:
