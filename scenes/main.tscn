@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cl48nlgu3crf"]
+[gd_scene load_steps=32 format=3 uid="uid://cl48nlgu3crf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_clwvd"]
 [ext_resource type="Texture2D" uid="uid://btihnq2roxvea" path="res://art/template.png" id="1_k48c2"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ddiurxqm6pxxq" path="res://art/hand_select_1.png" id="7_x3yof"]
 [ext_resource type="Texture2D" uid="uid://tdko3ersywby" path="res://art/hand_select_2.png" id="8_1ck4k"]
 [ext_resource type="FontFile" uid="uid://xckdxrxit3gj" path="res://fonts/ChalkboyRegular-vmXe7.otf" id="8_i6cds"]
+[ext_resource type="FontFile" uid="uid://d2sh8btr51kh8" path="res://fonts/WigglyCurvesRegular-qZdAx.ttf" id="9_4u602"]
 [ext_resource type="Script" path="res://scenes/VoiceAnimator.gd" id="11_ituqj"]
 [ext_resource type="FontFile" uid="uid://bmjjm58wxhp3j" path="res://fonts/Kamryn 3D Italic D.otf" id="12_mueh2"]
 [ext_resource type="Texture2D" uid="uid://cqdpfl2d3jvhr" path="res://art/try again.png" id="13_4yv25"]
@@ -25,6 +26,43 @@
 [sub_resource type="Theme" id="Theme_17gog"]
 default_font = ExtResource("8_i6cds")
 default_font_size = 50
+
+[sub_resource type="Theme" id="Theme_ak41y"]
+default_font = ExtResource("9_4u602")
+default_font_size = 50
+
+[sub_resource type="Animation" id="Animation_cvuwv"]
+resource_name = "ScoreUpdate"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreUpdate:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(0.594604, 5.85634, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScoreUpdate:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(0.378929, 1, 1),
+"update": 0,
+"values": [Vector2(464, 20), Vector2(464, 1), Vector2(464, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uiadb"]
+_data = {
+"ScoreUpdate": SubResource("Animation_cvuwv")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g014k"]
 animations = [{
@@ -144,7 +182,7 @@ animations = [{
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_clwvd")
-timer_decay = 0.5
+timer_decay = 0.25
 
 [node name="Template" type="Sprite2D" parent="."]
 visible = false
@@ -189,6 +227,32 @@ theme = SubResource("Theme_17gog")
 text = "0"
 horizontal_alignment = 1
 clip_text = true
+
+[node name="ScoreUpdate" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(464, 20)
+scale = Vector2(0.71, 0.71)
+
+[node name="ScoreUpdateLabel" type="Label" parent="ScoreUpdate"]
+modulate = Color(0.15625, 0.0859375, 0, 1)
+offset_left = 18.0
+offset_right = 503.0
+offset_bottom = 48.0
+theme = SubResource("Theme_17gog")
+text = "100"
+clip_text = true
+
+[node name="Label" type="Label" parent="ScoreUpdate"]
+modulate = Color(0.15625, 0.0859375, 0, 1)
+offset_right = 40.0
+offset_bottom = 46.0
+theme = SubResource("Theme_ak41y")
+text = "+"
+
+[node name="ScoreUpdateAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uiadb")
+}
 
 [node name="Grid2" parent="." instance=ExtResource("2_tq8kh")]
 position = Vector2(123, 110)

@@ -167,9 +167,11 @@ func check_loop():
 		await get_tree().create_timer(0.7).timeout
 	
 	var score_diff = score - score_before
-	print(score_diff)
+#	print(score_diff)
 	if (score_diff > 0):
 		$VoiceAnimator.play_animation(score_diff, cascades - 1)
+		$ScoreUpdate/ScoreUpdateLabel.text = str(score_diff)
+		$ScoreUpdateAnimator.play("ScoreUpdate")
 #	if cascades > 0:
 #		$VoiceAnimator.play_animation(cascades-1)
 
