@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c36fg1x57b5qw"]
+[gd_scene load_steps=33 format=3 uid="uid://c36fg1x57b5qw"]
 
 [ext_resource type="Script" path="res://scenes/horizontal_bomb_anim.gd" id="1_tcpmr"]
 [ext_resource type="Texture2D" uid="uid://r4k0q01itku4" path="res://art/fruits/apple__destroyer.png" id="2_6a02l"]
@@ -31,19 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://4pbfa0ua5sj6" path="res://art/fruits/pear_vertical.png" id="29_inv4x"]
 [ext_resource type="Texture2D" uid="uid://c2f8yhe4oy4vs" path="res://art/fruits/blueberry_vertical.png" id="30_xxs16"]
 [ext_resource type="Texture2D" uid="uid://lckbate3aay8" path="res://art/fruits/grape_vertical.png" id="31_oq3r8"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7x8in"]
-emission_shape = 3
-emission_box_extents = Vector3(100, 50, 1)
-particle_flag_disable_z = true
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 10000.0
-initial_velocity_max = 10000.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_min = 5.0
-scale_max = 5.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_42ks1"]
 animations = [{
@@ -165,16 +152,6 @@ animations = [{
 
 [node name="horizontal_bomb_anim" type="Node2D"]
 script = ExtResource("1_tcpmr")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
-position = Vector2(-1000, 0)
-scale = Vector2(0.345455, 0.345455)
-emitting = false
-amount = 9
-process_material = SubResource("ParticleProcessMaterial_7x8in")
-texture = ExtResource("20_0cs7i")
-explosiveness = 0.3
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 4)

@@ -97,7 +97,7 @@ var sprites = [preload("res://art/fruits/apple.png"), preload("res://art/fruits/
 			   preload("res://art/fruits/blueberry.png"), preload("res://art/fruits/grape.png")]
 var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres").duplicate(true)
 
-var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/horizontal_bomb_anim.tscn")]
+var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/destroyer_bomb_anim.tscn"),preload("res://scenes/color_bomb_anim.tscn")]
 
 func play_destroy_anim(points: int, global_posn: Vector2):
 	$Node/RichTextLabel.add_text(str(points))
@@ -112,7 +112,6 @@ func play_destroy_anim(points: int, global_posn: Vector2):
 		$GPUParticles2D.emitting = true
 	elif (modifier == Global.Modifier.HORIZONTAL):
 		var s:Node2D = explosions[0].instantiate()
-		print(global_position, global_posn)
 		s.setup(type)
 		s.z_index = 100
 		s.visible = false
@@ -121,11 +120,26 @@ func play_destroy_anim(points: int, global_posn: Vector2):
 		s.visible = true
 	elif (modifier == Global.Modifier.VERTICAL):
 		var s:Node2D = explosions[0].instantiate()
-		print(global_position, global_posn)
 		s.setup(type)
 		s.z_index = 100
 		s.visible = false
 		s.rotation_degrees = 270
+		get_parent().add_child(s)
+		s.global_position = global_posn
+		s.visible = true
+	elif (modifier == Global.Modifier.DESTROYER_OF_EIGHT_TILES):
+		var s:Node2D = explosions[1].instantiate()
+		s.setup(type)
+		s.z_index = 100
+		s.visible = false
+		get_parent().add_child(s)
+		s.global_position = global_posn
+		s.visible = true
+	elif (modifier == Global.Modifier.BOMB):
+		var s:Node2D = explosions[2].instantiate()
+		s.setup(type)
+		s.z_index = 100
+		s.visible = false
 		get_parent().add_child(s)
 		s.global_position = global_posn
 		s.visible = true

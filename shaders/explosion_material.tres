@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bkm332ouk2ukd"]
 
-[ext_resource type="Texture2D" uid="uid://wepn0hs13a4c" path="res://art/icon.svg" id="1_ba4t3"]
+[ext_resource type="Texture2D" uid="uid://brm0vr4w22p1r" path="res://art/fruits/apple_explode.png" id="1_lktax"]
 
 [sub_resource type="Shader" id="Shader_7hyna"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.1.stable's ParticleProcessMaterial.
@@ -255,4 +255,4 @@ shader_parameter/lifetime_randomness = 2.0
 shader_parameter/emission_box_extents = Vector3(50, 50, 1)
 shader_parameter/color_value = Color(1, 1, 1, 1)
 shader_parameter/gravity = Vector3(0, 100, 0)
-shader_parameter/sprite = ExtResource("1_ba4t3")
+shader_parameter/sprite = ExtResource("1_lktax")

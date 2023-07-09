@@ -217,7 +217,7 @@ func process_one_bomb():
 			var p = bomb.posn + dir
 			if (p.x >= 0 && p.x < width && p.y >= 0 && p.y < height):
 				add_to_matches_and_bombs(p)
-		return 0.4
+		return 0.8
 	elif (bomb.bomb_type == Global.Modifier.VERTICAL):
 		for i in height:
 			var p = Vector2(bomb.posn.x, i)
