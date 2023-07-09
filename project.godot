@@ -25,6 +25,7 @@ AudioAutoload="*res://scenes/AudioAutoload.tscn"
 
 window/size/viewport_width=800
 window/size/viewport_height=720
+window/size/resizable=false
 
 [input]
 
