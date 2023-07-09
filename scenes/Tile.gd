@@ -131,6 +131,7 @@ func play_destroy_anim(points: int, global_posn: Vector2):
 		$GPUParticles2D.emitting = true
 
 func destroy_bomb_tile(global_posn: Vector2, t: Global.TileType, mod: Global.Modifier):
+	AudioAutoload.play_bomb()
 	if (mod == Global.Modifier.HORIZONTAL):
 		var s:Node2D = explosions[0].instantiate()
 		s.setup(t)

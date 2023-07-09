@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c36fg1x57b5qw"]
+[gd_scene load_steps=34 format=3 uid="uid://d07f3hw1ycm6a"]
 
 [ext_resource type="Script" path="res://scenes/horizontal_bomb_anim.gd" id="1_tcpmr"]
 [ext_resource type="Texture2D" uid="uid://r4k0q01itku4" path="res://art/fruits/apple__destroyer.png" id="2_6a02l"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://4pbfa0ua5sj6" path="res://art/fruits/pear_vertical.png" id="29_inv4x"]
 [ext_resource type="Texture2D" uid="uid://c2f8yhe4oy4vs" path="res://art/fruits/blueberry_vertical.png" id="30_xxs16"]
 [ext_resource type="Texture2D" uid="uid://lckbate3aay8" path="res://art/fruits/grape_vertical.png" id="31_oq3r8"]
+[ext_resource type="AudioStream" uid="uid://bh3mf5e8b7178" path="res://audio/knife.mp3" id="32_pw3x1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_42ks1"]
 animations = [{
@@ -158,3 +159,7 @@ position = Vector2(0, 4)
 scale = Vector2(0.345455, 0.345455)
 sprite_frames = SubResource("SpriteFrames_42ks1")
 animation = &"HorizontalBomb"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("32_pw3x1")
+volume_db = -6.228

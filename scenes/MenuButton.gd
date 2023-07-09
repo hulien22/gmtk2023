@@ -13,7 +13,7 @@ func _process(delta):
 func _on_mouse_entered():
 	var tween: Tween = create_tween()
 	tween.tween_property(self,"scale",Vector2(1.1,1.1), 0.05).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
-	AudioAutoload.play_destroyer()
+	AudioAutoload.play_bomb()
 
 func _on_mouse_exited():
 	var tween: Tween = create_tween()

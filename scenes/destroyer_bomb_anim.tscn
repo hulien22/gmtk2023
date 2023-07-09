@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dxk0xt6kfeesk"]
+[gd_scene load_steps=33 format=3 uid="uid://b25rshtk2jm73"]
 
 [ext_resource type="Script" path="res://scenes/destroyer_bomb_anim.gd" id="1_mcc20"]
 [ext_resource type="Texture2D" uid="uid://c1gr86w6jjnpf" path="res://art/fruits/apple_horizontal.png" id="2_hii1f"]
@@ -158,3 +158,5 @@ position = Vector2(0, 4)
 scale = Vector2(0.345455, 0.345455)
 sprite_frames = SubResource("SpriteFrames_42ks1")
 animation = &"DestroyerBomb"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
