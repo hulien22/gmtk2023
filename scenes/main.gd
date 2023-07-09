@@ -142,13 +142,15 @@ func check_loop():
 					await get_tree().create_timer(0.3).timeout
 				break
 		
-		$Grid2.clear_placing_bombs()
+		if $Grid2.clear_placing_bombs():
+			# wait for bomb creation animation
+			await get_tree().create_timer(1).timeout
 		
 #		await get_tree().create_timer(0.4).timeout
 		$Grid2.drop_tiles()
 #		$Grid2.disable_all_clickable_tiles()
 		# wait a bit in between drops
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.7).timeout
 	if cascades > 0:
 		
 		$VoiceAnimator.play_animation(cascades-1)
