@@ -97,24 +97,25 @@ var sprites = [preload("res://art/fruits/apple.png"), preload("res://art/fruits/
 			   preload("res://art/fruits/blueberry.png"), preload("res://art/fruits/grape.png")]
 var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres").duplicate(true)
 
-func destroy(points: int):
+func play_destroy_anim(points: int):
 	$Node/RichTextLabel.add_text(str(points))
 	#play destruction animation
 #	var tween: Tween = create_tween()
 #	tween.connect("finished", delete_self)
 #	tween.tween_property(self,"position",Vector2(position.x, position.y + 100), 3).set_trans(Tween.TRANS_QUAD)
+	# TODO handle bombs specially?
+	explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
+	$GPUParticles2D.process_material = explosion_shader
+	$GPUParticles2D.emitting = true
+	$Node.visible = false
+
+func destroy():
 	var timer := Timer.new()
 	add_child(timer)
 	timer.wait_time = $GPUParticles2D.lifetime
 	timer.one_shot = true
 	timer.connect("timeout", delete_self)
-	# TODO handle bombs specially?
-	explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
-	$GPUParticles2D.process_material = explosion_shader
-	$GPUParticles2D.emitting = true
 	timer.start()
-	# hide rest of things
-	$Node.visible = false
 	# TODO special effect if this is the player object??
 
 func delete_self():
@@ -122,4 +123,4 @@ func delete_self():
 	queue_free()
 	
 func make_bomb():
-	pass
+	$Node.visible = true
