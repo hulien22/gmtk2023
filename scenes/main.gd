@@ -221,3 +221,6 @@ func estimate_score(type_grid, width, height):
 func _on_increase_score(amount:int):
 	score += amount
 	$ScoreLabel.text = str(score)
+	
+func _on_try_again():
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")

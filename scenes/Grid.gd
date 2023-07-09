@@ -5,6 +5,8 @@ extends Node2D
 @export var tile_spread: float
 @export var tile_size: float
 
+signal on_die
+
 var tiles = [[]]
 
 # store player tile location - TODO want this to be a vector?
@@ -250,6 +252,7 @@ func add_to_matches_and_bombs(p: Vector2):
 			Engine.time_scale = 0.05
 			player_posn = Vector2.INF
 			AudioAutoload.slowmo()
+			on_die.emit()
 		return true
 	return false
 
