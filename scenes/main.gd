@@ -150,7 +150,7 @@ func check_loop():
 		$Grid2.drop_tiles()
 #		$Grid2.disable_all_clickable_tiles()
 		# wait a bit in between drops
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.7).timeout
 	if cascades > 0:
 		
 		$VoiceAnimator.play_animation(cascades-1)

@@ -357,7 +357,7 @@ func drop_tiles():
 
 	for h in height:
 		for w in width:
-			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_ELASTIC, 0.5)
+			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_ELASTIC, 0.7)
 #	print(player_posn)
 
 func remove_deleted_tiles():
