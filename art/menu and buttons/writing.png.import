@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpiva50epckcx"
-path="res://.godot/imported/writing.png-277d4d88922cd81cd3c2eb82ef0efd0b.ctex"
+path="res://.godot/imported/writing.png-7e53578b469fb9f8e27b609f081081c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/menu title screen/writing.png"
-dest_files=["res://.godot/imported/writing.png-277d4d88922cd81cd3c2eb82ef0efd0b.ctex"]
+source_file="res://art/menu and buttons/writing.png"
+dest_files=["res://.godot/imported/writing.png-7e53578b469fb9f8e27b609f081081c7.ctex"]
 
 [params]
 

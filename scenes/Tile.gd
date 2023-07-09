@@ -39,9 +39,14 @@ func set_type(t: Global.TileType):
 #			visible = false
 			pass
 	$Node/ColorRect.modulate.a = 1
-	$Node/Sprites.frame = Global.get_index_from_type(t)
+	
+	# don't change player to empty frame on death
+	if !(is_player && type == Global.TileType.EMPTY):
+		$Node/Sprites.frame = Global.get_index_from_type(t)
 
 func set_modifier(m: Global.Modifier):
+	if (is_player):
+		return
 	modifier = m
 	match m:
 		Global.Modifier.NONE:
@@ -68,9 +73,7 @@ func _process(delta):
 func set_is_player(enable:bool):
 	is_player = enable
 	if (is_player):
-		$Node/PlayerFaces.visible = true
-		$Node/PlayerFaces.set_animation("Happy")
-		$Node/PlayerFaces.play()
+		set_emotion("Happy")
 	else:
 		$Node/PlayerFaces.visible = false
 
@@ -84,6 +87,13 @@ func set_clickable(enable: bool):
 	$Node/RichTextLabel.clear()
 	$Node/RichTextLabel.add_text(str(posn))
 
+func set_emotion(emotion: String):
+	if is_player:
+		$Node/PlayerFaces.visible = true
+		$Node/PlayerFaces.set_animation(emotion)
+		$Node/PlayerFaces.play()
+		
+
 func _button_pressed():
 	Events.emit_signal("move_player_click", posn)
 
@@ -95,24 +105,60 @@ func move(target, transformation, secs):
 var sprites = [preload("res://art/fruits/apple.png"), preload("res://art/fruits/orange.png"),
 			   preload("res://art/fruits/lemon.png"), preload("res://art/fruits/pear.png"),
 			   preload("res://art/fruits/blueberry.png"), preload("res://art/fruits/grape.png")]
-var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres").duplicate(true)
+
+var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres")
+
+var explosion_shaders = [preload("res://shaders/explosion_material_red.tres"), preload("res://shaders/explosion_material_orange.tres"),
+						 preload("res://shaders/explosion_material_yellow.tres"), preload("res://shaders/explosion_material_green.tres"),
+						 preload("res://shaders/explosion_material_blue.tres"), preload("res://shaders/explosion_material_purple.tres")]
 
 var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/destroyer_bomb_anim.tscn"),preload("res://scenes/color_bomb_anim.tscn")]
 
-func play_destroy_anim(points: int, global_posn: Vector2):
-	$Node/RichTextLabel.add_text(str(points))
-	#play destruction animation
-#	var tween: Tween = create_tween()
-#	tween.connect("finished", delete_self)
-#	tween.tween_property(self,"position",Vector2(position.x, position.y + 100), 3).set_trans(Tween.TRANS_QUAD)
-	# TODO handle bombs specially?
-	if (modifier == Global.Modifier.NONE || placing_bomb):
-		explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
-		$GPUParticles2D.process_material = explosion_shader
-		$GPUParticles2D.emitting = true
+var score_effect = preload("res://scenes/score_effect.tscn")
+
+func play_destroy_anim(cascade: float, global_posn: Vector2):
+	$Node/RichTextLabel.add_text(str(cascade))
+	
+	var pts = cascade
+	if (placing_bomb):
+		pts *= 20
+	else:
+		match modifier:
+			Global.Modifier.NONE:
+				pts *= 20
+			Global.Modifier.HORIZONTAL:
+				pts *= 40
+			Global.Modifier.VERTICAL:
+				pts *= 40
+			Global.Modifier.DESTROYER_OF_EIGHT_TILES:
+				pts *= 60
+			Global.Modifier.BOMB:
+				pts *= 100
+	pts = floor(pts)
+	#TODO spawn score obj
+	Events.emit_signal("increase_score", pts)
+	var se = score_effect.instantiate()
+	se.setup(pts, type, global_position)
+	se.z_index = 100
+	get_parent().add_child(se)
+
 	$Node.visible = false
+	if (is_player):
+		AudioAutoload.play_die()
+		z_index = 1000
+		var tween: Tween = create_tween()
+		tween.connect("finished", explode_player.bind(type))
+		tween.tween_property(self,"scale",Vector2(5,5), 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		$Node.visible = true
+		set_emotion("Fear")
+	elif (modifier == Global.Modifier.NONE || placing_bomb):
+#		explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
+		$GPUParticles2D.process_material = explosion_shaders[Global.get_index_from_type(type)]
+		$GPUParticles2D.emitting = true
+	
 
 func destroy_bomb_tile(global_posn: Vector2, t: Global.TileType, mod: Global.Modifier):
+	AudioAutoload.play_bomb()
 	if (mod == Global.Modifier.HORIZONTAL):
 		var s:Node2D = explosions[0].instantiate()
 		s.setup(t)
@@ -163,6 +209,8 @@ func delete_self():
 var simple_fruit: PackedScene = preload("res://scenes/simple_fruit.tscn")
 var bomb_spawn: PackedScene = preload("res://scenes/bomb_spawn_anim.tscn")
 func make_bomb():
+	if (is_player):
+		return
 	for p in endpoints:
 		var f = simple_fruit.instantiate()
 		f.setup(type, global_position)
@@ -179,3 +227,13 @@ func make_bomb():
 	b.visible = true
 	
 	$Node.visible = true
+
+func explode_player(t: Global.TileType):
+	Engine.time_scale = 1
+#	AudioAutoload.regspeed()
+	explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(t)])
+	$GPUParticles2D.process_material = explosion_shader
+	$GPUParticles2D.amount = 10000
+	$GPUParticles2D.emitting = true
+	$Node.visible = false
+	Global.GAME_OVER = true

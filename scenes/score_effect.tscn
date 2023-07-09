@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bksnli1o64tcp"]
+
+[ext_resource type="Script" path="res://scenes/score_effect.gd" id="1_cqwuf"]
+[ext_resource type="FontFile" uid="uid://d2sh8btr51kh8" path="res://fonts/WigglyCurvesRegular-qZdAx.ttf" id="2_6k8s3"]
+
+[sub_resource type="Theme" id="Theme_scc21"]
+default_font = ExtResource("2_6k8s3")
+default_font_size = 30
+
+[node name="score_effect" type="Node2D"]
+z_index = 10
+script = ExtResource("1_cqwuf")
+
+[node name="ScoreLabel3" type="Label" parent="."]
+visible = false
+offset_left = -165.0
+offset_top = -22.0
+offset_right = 165.0
+offset_bottom = 26.0
+theme = SubResource("Theme_scc21")
+text = "0"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = -165.0
+offset_top = -22.0
+offset_right = 165.0
+offset_bottom = 26.0
+theme = SubResource("Theme_scc21")
+text = "0"
+horizontal_alignment = 1
+clip_text = true

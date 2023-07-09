@@ -1,0 +1,288 @@
+[gd_scene load_steps=14 format=3 uid="uid://dsy8ern8j1108"]
+
+[ext_resource type="Script" path="res://scenes/HelpMenu.gd" id="1_rh2gc"]
+[ext_resource type="Texture2D" uid="uid://cb8rtx75n5ojj" path="res://art/menu and buttons/menu.png" id="2_ad0we"]
+[ext_resource type="Script" path="res://scenes/MenuButton.gd" id="2_h0gfv"]
+[ext_resource type="Texture2D" uid="uid://des2t6y35mxvd" path="res://art/menu and buttons/controls.png" id="5_te5sg"]
+[ext_resource type="Texture2D" uid="uid://cgpysm2jm1i4p" path="res://art/menu and buttons/combos.png" id="6_ucmk2"]
+[ext_resource type="Texture2D" uid="uid://cxh5pva6q3vqy" path="res://art/fruits/apple.png" id="7_vsiar"]
+[ext_resource type="Texture2D" uid="uid://cl04rjaed4hnf" path="res://art/fruits/orange.png" id="8_fxtjk"]
+[ext_resource type="Texture2D" uid="uid://dyept55xdae20" path="res://art/fruits/blueberry.png" id="9_ew2c1"]
+[ext_resource type="Texture2D" uid="uid://c1gr86w6jjnpf" path="res://art/fruits/apple_horizontal.png" id="10_qrvfx"]
+[ext_resource type="Texture2D" uid="uid://7m7fl7suggxf" path="res://art/fruits/orange_explode.png" id="10_spy4e"]
+[ext_resource type="Texture2D" uid="uid://bx8b1x0ejdfhv" path="res://art/fruits/blueberry_destroyer.png" id="11_b6cux"]
+[ext_resource type="Texture2D" uid="uid://6ajmgiqqq0j0" path="res://art/menu and buttons/gameplay.png" id="12_dgdj1"]
+[ext_resource type="FontFile" uid="uid://xckdxrxit3gj" path="res://fonts/ChalkboyRegular-vmXe7.otf" id="13_5knpp"]
+
+[node name="HelpMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rh2gc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 571.0
+offset_top = 9.0
+offset_right = 758.0
+offset_bottom = 95.0
+texture_normal = ExtResource("2_ad0we")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_h0gfv")
+
+[node name="Controls" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 65.0
+offset_right = 306.0
+offset_bottom = 143.0
+texture = ExtResource("5_te5sg")
+expand_mode = 1
+
+[node name="Combos" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 365.0
+offset_right = 256.0
+offset_bottom = 438.0
+texture = ExtResource("6_ucmk2")
+expand_mode = 1
+
+[node name="Combo4" type="Node" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Combo4"]
+offset_left = 168.0
+offset_top = 440.0
+offset_right = 230.0
+offset_bottom = 502.0
+texture = ExtResource("7_vsiar")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Combo4"]
+offset_left = 40.0
+offset_top = 438.0
+offset_right = 102.0
+offset_bottom = 500.0
+texture = ExtResource("7_vsiar")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Combo4"]
+offset_left = 104.0
+offset_top = 438.0
+offset_right = 166.0
+offset_bottom = 500.0
+texture = ExtResource("7_vsiar")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="Combo4"]
+offset_left = 228.0
+offset_top = 440.0
+offset_right = 290.0
+offset_bottom = 502.0
+texture = ExtResource("7_vsiar")
+expand_mode = 1
+
+[node name="Combo6" type="Node" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Combo6"]
+offset_left = 45.0
+offset_top = 501.0
+offset_right = 99.0
+offset_bottom = 555.0
+texture = ExtResource("8_fxtjk")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Combo6"]
+offset_left = 161.0
+offset_top = 502.0
+offset_right = 215.0
+offset_bottom = 556.0
+texture = ExtResource("8_fxtjk")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Combo6"]
+offset_left = 102.0
+offset_top = 502.0
+offset_right = 156.0
+offset_bottom = 556.0
+texture = ExtResource("8_fxtjk")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="Combo6"]
+offset_left = 221.0
+offset_top = 503.0
+offset_right = 275.0
+offset_bottom = 557.0
+texture = ExtResource("8_fxtjk")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="Combo6"]
+offset_left = 343.0
+offset_top = 502.0
+offset_right = 397.0
+offset_bottom = 556.0
+texture = ExtResource("8_fxtjk")
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="Combo6"]
+offset_left = 285.0
+offset_top = 505.0
+offset_right = 339.0
+offset_bottom = 559.0
+texture = ExtResource("8_fxtjk")
+expand_mode = 1
+
+[node name="ComboL" type="Node" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="ComboL"]
+offset_left = 35.0
+offset_top = 549.0
+offset_right = 111.0
+offset_bottom = 625.0
+texture = ExtResource("9_ew2c1")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="ComboL"]
+offset_left = 155.0
+offset_top = 550.0
+offset_right = 231.0
+offset_bottom = 626.0
+texture = ExtResource("9_ew2c1")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="ComboL"]
+offset_left = 93.0
+offset_top = 552.0
+offset_right = 169.0
+offset_bottom = 628.0
+texture = ExtResource("9_ew2c1")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="ComboL"]
+offset_left = 36.0
+offset_top = 600.0
+offset_right = 112.0
+offset_bottom = 676.0
+texture = ExtResource("9_ew2c1")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="ComboL"]
+offset_left = 34.0
+offset_top = 651.0
+offset_right = 110.0
+offset_bottom = 727.0
+texture = ExtResource("9_ew2c1")
+expand_mode = 1
+
+[node name="Knife" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 399.0
+offset_top = 430.0
+offset_right = 488.0
+offset_bottom = 519.0
+texture = ExtResource("10_qrvfx")
+expand_mode = 1
+
+[node name="Fork" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 501.0
+offset_right = 486.0
+offset_bottom = 567.0
+texture = ExtResource("10_spy4e")
+expand_mode = 1
+
+[node name="Bomb" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 593.0
+offset_right = 494.0
+offset_bottom = 674.0
+texture = ExtResource("11_b6cux")
+expand_mode = 1
+
+[node name="Gameplay" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 189.0
+offset_right = 310.0
+offset_bottom = 263.0
+texture_normal = ExtResource("12_dgdj1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="GameplayText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 268.0
+offset_right = 805.0
+offset_bottom = 354.0
+theme_override_colors/default_color = Color(0.46875, 0, 0.179688, 1)
+theme_override_fonts/normal_font = ExtResource("13_5knpp")
+theme_override_font_sizes/normal_font_size = 30
+text = "Move around, swap fruits, and match at least 3 fruits to score points. 
+Avoid getting matched, and watch out for the Blue Highlighted Tiles the AI Player is going to swap."
+fit_content = true
+scroll_active = false
+
+[node name="ControlsText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 145.0
+offset_right = 796.0
+offset_bottom = 182.0
+theme_override_colors/default_color = Color(0.46875, 0, 0.179688, 1)
+theme_override_fonts/normal_font = ExtResource("13_5knpp")
+theme_override_font_sizes/normal_font_size = 30
+text = "Use WASD, Arrow Keys, or Click the Red Highlighted Tiles to move."
+fit_content = true
+scroll_active = false
+
+[node name="KnifeText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 456.0
+offset_right = 795.0
+offset_bottom = 496.0
+theme_override_colors/default_color = Color(0.507813, 0.0429688, 0.171875, 1)
+theme_override_fonts/normal_font = ExtResource("13_5knpp")
+theme_override_font_sizes/normal_font_size = 30
+text = "Destroys a row or column."
+scroll_active = false
+
+[node name="ForkText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 520.0
+offset_right = 795.0
+offset_bottom = 560.0
+theme_override_colors/default_color = Color(0.507813, 0.0429688, 0.171875, 1)
+theme_override_fonts/normal_font = ExtResource("13_5knpp")
+theme_override_font_sizes/normal_font_size = 30
+text = "Destroys matching colors."
+scroll_active = false
+
+[node name="BombText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 622.0
+offset_right = 799.0
+offset_bottom = 662.0
+theme_override_colors/default_color = Color(0.507813, 0.0429688, 0.171875, 1)
+theme_override_fonts/normal_font = ExtResource("13_5knpp")
+theme_override_font_sizes/normal_font_size = 30
+text = "Destroys a 3 by 3 area."
+scroll_active = false
+
+[connection signal="mouse_entered" from="MenuButton" to="MenuButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MenuButton" to="MenuButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_return_menu"]

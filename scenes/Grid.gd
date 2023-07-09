@@ -5,6 +5,8 @@ extends Node2D
 @export var tile_spread: float
 @export var tile_size: float
 
+signal on_die
+
 var tiles = [[]]
 
 # store player tile location - TODO want this to be a vector?
@@ -71,7 +73,10 @@ func check_for_matches():
 	destroyed_matches.clear()
 	bombs.clear()
 	placing_bombs.clear()
-
+		
+	if (player_posn != Vector2.INF):
+		tiles[player_posn.y][player_posn.x].set_emotion("Cold")
+	
 	# Get all tiles to destroy
 	for h in height:
 		for w in width:
@@ -176,6 +181,8 @@ func check_for_matches():
 #		_debug_log_grid()
 	
 #	print(matches.size(), matches)
+	if (matches.is_empty() && player_posn != Vector2.INF):
+		tiles[player_posn.y][player_posn.x].set_emotion("Happy")
 	return (matches.size() > 0)
 
 func count_matches_in_direction(posn:Vector2, dict:Dictionary, dir:Vector2):
@@ -241,6 +248,11 @@ func add_to_matches_and_bombs(p: Vector2):
 				tile_type = tiles[p.y][p.x].type,
 				tile = tiles[p.y][p.x]
 			})
+		if p == player_posn:
+			Engine.time_scale = 0.05
+			player_posn = Vector2.INF
+			AudioAutoload.slowmo()
+			on_die.emit()
 		return true
 	return false
 
@@ -253,13 +265,13 @@ func clear_placing_bombs():
 		tiles[m.y][m.x].make_bomb()
 	return true
 
-func destroy_matches():
+func destroy_matches(cascade: float):
 	# Moves new matches to destroyed_matches, then plays their destroy animation
 	var destroyed:bool = false
 	for m in matches:
 #		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 		if (!destroyed_matches.has(m)):
-			tiles[m.y][m.x].play_destroy_anim(20, global_posn_from_grid(m))
+			tiles[m.y][m.x].play_destroy_anim(cascade, global_posn_from_grid(m))
 			if (!tiles[m.y][m.x].placing_bomb):
 				tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 			else:
@@ -358,6 +370,9 @@ func drop_tiles():
 	for h in height:
 		for w in width:
 			tiles[h][w].move(posn_from_grid(Vector2(w,h)), Tween.TRANS_ELASTIC, 0.7)
+	
+	if (player_posn != Vector2.INF):
+		tiles[player_posn.y][player_posn.x].set_emotion("Happy")
 #	print(player_posn)
 
 func remove_deleted_tiles():
