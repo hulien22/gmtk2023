@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://x8kn1d2320sb"]
+[gd_scene load_steps=16 format=3 uid="uid://x8kn1d2320sb"]
 
 [ext_resource type="Script" path="res://scenes/AudioAutoload.gd" id="1_jdtue"]
 [ext_resource type="AudioStream" uid="uid://cd44elok4f4ws" path="res://audio/FruitSugarHighV1.mp3" id="2_yfefp"]
@@ -9,10 +9,20 @@
 [ext_resource type="AudioStream" uid="uid://daehuqn2d3gj3" path="res://audio/pop_g5.mp3" id="7_nmy4r"]
 [ext_resource type="AudioStream" uid="uid://bl7qnhn3rqon1" path="res://audio/pop_a5.mp3" id="8_27gno"]
 [ext_resource type="AudioStream" uid="uid://dc5ba7piwle51" path="res://audio/pop_b5.mp3" id="9_7ixvf"]
+[ext_resource type="AudioStream" uid="uid://cgpase1yxlspo" path="res://audio/balanced.mp3" id="10_x6f0y"]
+[ext_resource type="AudioStream" uid="uid://bmcaidemglfu0" path="res://audio/healthy.mp3" id="11_ykemp"]
+[ext_resource type="AudioStream" uid="uid://cgh3up7himrex" path="res://audio/nutritious.mp3" id="12_ked1a"]
+[ext_resource type="AudioStream" uid="uid://pwlsh237ecwe" path="res://audio/invigorating.mp3" id="13_ujt4f"]
+[ext_resource type="AudioStream" uid="uid://bropd3cmbm70" path="res://audio/ketotacular.mp3" id="14_iukie"]
+[ext_resource type="AudioStream" uid="uid://bt3sfdfhidos5" path="res://audio/paleopocalype.mp3" id="15_nurkk"]
 
 [node name="AudioAutoload" type="AudioStreamPlayer"]
+volume_db = -10.0
 script = ExtResource("1_jdtue")
 song = ExtResource("2_yfefp")
 pops = Array[AudioStream]([ExtResource("3_h8qhr"), ExtResource("4_st6i7"), ExtResource("5_ilo8h"), ExtResource("6_51bnt"), ExtResource("7_nmy4r"), ExtResource("8_27gno"), ExtResource("9_7ixvf"), ExtResource("3_h8qhr")])
+voices = Array[AudioStream]([ExtResource("10_x6f0y"), ExtResource("11_ykemp"), ExtResource("12_ked1a"), ExtResource("13_ujt4f"), ExtResource("14_iukie"), ExtResource("15_nurkk")])
 
 [node name="SoundEffect" type="AudioStreamPlayer" parent="."]
+
+[node name="VoiceEffect" type="AudioStreamPlayer" parent="."]
