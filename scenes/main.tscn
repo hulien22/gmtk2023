@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cl48nlgu3crf"]
+[gd_scene load_steps=28 format=3 uid="uid://cl48nlgu3crf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_clwvd"]
 [ext_resource type="Texture2D" uid="uid://btihnq2roxvea" path="res://art/template.png" id="1_k48c2"]
@@ -15,6 +15,12 @@
 [ext_resource type="FontFile" uid="uid://bmjjm58wxhp3j" path="res://fonts/Kamryn 3D Italic D.otf" id="12_mueh2"]
 [ext_resource type="Texture2D" uid="uid://cqdpfl2d3jvhr" path="res://art/try again.png" id="13_4yv25"]
 [ext_resource type="Script" path="res://scenes/MenuButton.gd" id="14_e6gsn"]
+[ext_resource type="Texture2D" uid="uid://daehdobbojmsv" path="res://art/menu and buttons/balanced.png" id="14_uc2v3"]
+[ext_resource type="Texture2D" uid="uid://ptuydrf3mbi2" path="res://art/menu and buttons/healthy.png" id="15_g6qtk"]
+[ext_resource type="Texture2D" uid="uid://koqejplsjm5f" path="res://art/menu and buttons/invigorating.png" id="16_rwnro"]
+[ext_resource type="Texture2D" uid="uid://cpoevxbu3rgpr" path="res://art/menu and buttons/nutritious.png" id="17_oi84c"]
+[ext_resource type="Texture2D" uid="uid://bw7f1j80syw5u" path="res://art/menu and buttons/ketotacular.png" id="18_3n1k1"]
+[ext_resource type="Texture2D" uid="uid://brfc7yspv0gm2" path="res://art/menu and buttons/paleopocalypse.png" id="19_82u23"]
 
 [sub_resource type="Theme" id="Theme_17gog"]
 default_font = ExtResource("8_i6cds")
@@ -67,7 +73,7 @@ resource_name = "ShowVoiceLine"
 length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("VoiceAnimator/VoiceLabel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -91,12 +97,50 @@ tracks/1/keys = {
 "method": &"play_audio"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VoiceAnimator/VoiceText:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2.5),
+"transitions": PackedFloat32Array(0.31864, 1, 0.225313, 1),
+"update": 0,
+"values": [Vector2(9, -164), Vector2(9, 10), Vector2(9, 10), Vector2(9, -164)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w28sn"]
 _data = {
 "Die": SubResource("Animation_jx80d"),
 "ShowVoiceLine": SubResource("Animation_8hddg")
 }
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yocvj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_uc2v3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_g6qtk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_oi84c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_rwnro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_3n1k1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_82u23")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_clwvd")
@@ -200,6 +244,13 @@ text = "Nutritious"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="VoiceText" type="AnimatedSprite2D" parent="VoiceAnimator"]
+position = Vector2(9, -164)
+scale = Vector2(0.68985, 0.68985)
+sprite_frames = SubResource("SpriteFrames_yocvj")
+frame_progress = 0.532543
+centered = false
 
 [node name="TextureButton" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)

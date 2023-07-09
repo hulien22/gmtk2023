@@ -110,7 +110,7 @@ func check_for_matches():
 				for i in c:
 					var p = m + dir*i
 					if (i == mid):
-						print("PLACING COLOR BOMB ", p)
+#						print("PLACING COLOR BOMB ", p)
 						tiles[mid_p.y][mid_p.x].set_type_and_modifier(match_color, Global.Modifier.BOMB)
 						tiles[mid_p.y][mid_p.x].marked_for_destruction = true
 						tiles[mid_p.y][mid_p.x].placing_bomb = true
@@ -134,7 +134,7 @@ func check_for_matches():
 		if (col_count >= 3 && row_count >= 3):
 			var match_color = matches[m]
 			# Add bomb
-			print("PLACING DESTROYER BOMB ", m)
+#			print("PLACING DESTROYER BOMB ", m)
 			tiles[m.y][m.x].set_type_and_modifier(match_color, Global.Modifier.DESTROYER_OF_EIGHT_TILES)
 			tiles[m.y][m.x].marked_for_destruction = true
 			tiles[m.y][m.x].placing_bomb = true
@@ -165,10 +165,10 @@ func check_for_matches():
 					var p = m + dir*i
 					if (i == mid):
 						if (dir == Vector2.RIGHT):
-							print("PLACING HORI BOMB ", p)
+#							print("PLACING HORI BOMB ", p)
 							tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.HORIZONTAL)
 						else:
-							print("PLACING VERT BOMB ", p)
+#							print("PLACING VERT BOMB ", p)
 							tiles[p.y][p.x].set_type_and_modifier(match_color, Global.Modifier.VERTICAL)
 						tiles[mid_p.y][mid_p.x].marked_for_destruction = true
 						tiles[mid_p.y][mid_p.x].placing_bomb = true

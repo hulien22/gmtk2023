@@ -72,7 +72,7 @@ func start_player_turn():
 	$Swap2.play()
 	$Swap1.visible = true
 	$Swap2.visible = true
-	print("finger will swap: ", finger_swap)
+#	print("finger will swap: ", finger_swap)
 	can_click = true
 	$Grid2.set_clickable_tiles()
 	$TurnTimer.start(timer_time)
@@ -135,6 +135,7 @@ func _on_playermovetimer_timeout():
 
 func check_loop():
 	var cascades = -1
+	var score_before = score
 	while ($Grid2.check_for_matches()):
 		cascades += 1
 		AudioAutoload.play_pop(cascades)
@@ -164,8 +165,13 @@ func check_loop():
 #		$Grid2.disable_all_clickable_tiles()
 		# wait a bit in between drops
 		await get_tree().create_timer(0.7).timeout
-	if cascades > 0:
-		$VoiceAnimator.play_animation(cascades-1)
+	
+	var score_diff = score - score_before
+	print(score_diff)
+	if (score_diff > 0):
+		$VoiceAnimator.play_animation(score_diff, cascades - 1)
+#	if cascades > 0:
+#		$VoiceAnimator.play_animation(cascades-1)
 
 func select_finger_swap():
 	# TODO do we need to be smarter about this to stop player from just corner camping?
