@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cl48nlgu3crf"]
+[gd_scene load_steps=21 format=3 uid="uid://cl48nlgu3crf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_clwvd"]
 [ext_resource type="Texture2D" uid="uid://btihnq2roxvea" path="res://art/template.png" id="1_k48c2"]
@@ -13,6 +13,8 @@
 [ext_resource type="FontFile" uid="uid://xckdxrxit3gj" path="res://fonts/ChalkboyRegular-vmXe7.otf" id="8_i6cds"]
 [ext_resource type="Script" path="res://scenes/VoiceAnimator.gd" id="11_ituqj"]
 [ext_resource type="FontFile" uid="uid://bmjjm58wxhp3j" path="res://fonts/Kamryn 3D Italic D.otf" id="12_mueh2"]
+[ext_resource type="Texture2D" uid="uid://cqdpfl2d3jvhr" path="res://art/try again.png" id="13_4yv25"]
+[ext_resource type="Script" path="res://scenes/MenuButton.gd" id="14_e6gsn"]
 
 [sub_resource type="Theme" id="Theme_17gog"]
 default_font = ExtResource("8_i6cds")
@@ -31,6 +33,34 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_jx80d"]
+resource_name = "Die"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureButton:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 2.9, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_8hddg"]
 resource_name = "ShowVoiceLine"
@@ -64,6 +94,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w28sn"]
 _data = {
+"Die": SubResource("Animation_jx80d"),
 "ShowVoiceLine": SubResource("Animation_8hddg")
 }
 
@@ -169,3 +200,19 @@ text = "Nutritious"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 103.0
+offset_top = 269.0
+offset_right = 647.0
+offset_bottom = 418.0
+disabled = true
+texture_normal = ExtResource("13_4yv25")
+stretch_mode = 0
+script = ExtResource("14_e6gsn")
+
+[connection signal="on_die" from="Grid2" to="VoiceAnimator" method="_on_die"]
+[connection signal="mouse_entered" from="TextureButton" to="TextureButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="TextureButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_try_again"]
