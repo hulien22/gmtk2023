@@ -127,13 +127,33 @@ func check_loop():
 	while ($Grid2.check_for_matches()):
 		cascades += 1
 		AudioAutoload.play_pop(cascades)
+		
+		# TODO queue the bomb destruction? store in bombs field, and have main check that and queue this?
+		if $Grid2.destroy_matches():
+			await get_tree().create_timer(0.3).timeout
+		while (true):
+			var bomb_time = $Grid2.process_one_bomb()
+			print(bomb_time)
+			if (bomb_time > 0):
+				await get_tree().create_timer(bomb_time).timeout
+				$Grid2.destroy_matches()
+				await get_tree().create_timer(bomb_time).timeout
+				bomb_time = $Grid2.process_one_bomb()
+			else:
+				if $Grid2.destroy_matches():
+					await get_tree().create_timer(0.3).timeout
+				break
+		
+		$Grid2.clear_placing_bombs()
+		
 #		await get_tree().create_timer(0.4).timeout
 		$Grid2.drop_tiles()
-		$Grid2.disable_all_clickable_tiles()
+#		$Grid2.disable_all_clickable_tiles()
 		# wait a bit in between drops
 		await get_tree().create_timer(0.4).timeout
-	if cascades >= 0:
-		AudioAutoload.play_voice(cascades)
+	if cascades > 0:
+		
+		$VoiceAnimator.play_animation(cascades-1)
 
 func select_finger_swap():
 	# TODO do we need to be smarter about this to stop player from just corner camping?

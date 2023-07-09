@@ -26,3 +26,5 @@ voices = Array[AudioStream]([ExtResource("10_x6f0y"), ExtResource("11_ykemp"), E
 [node name="SoundEffect" type="AudioStreamPlayer" parent="."]
 
 [node name="VoiceEffect" type="AudioStreamPlayer" parent="."]
+
+[connection signal="finished" from="." to="." method="_on_finished"]

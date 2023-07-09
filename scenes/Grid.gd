@@ -62,12 +62,17 @@ func check_color(posn, type):
 
 var ordered_matches: Array[Vector2] = []
 var matches: Dictionary = {}
+var destroyed_matches: Dictionary = {}
 var bombs: Array[Dictionary] = []
+var placing_bombs: Dictionary = {}
 func check_for_matches():
-	# Get all tiles to destroy
 	ordered_matches.clear()
 	matches.clear()
+	destroyed_matches.clear()
 	bombs.clear()
+	placing_bombs.clear()
+
+	# Get all tiles to destroy
 	for h in height:
 		for w in width:
 			if (!check_color_x(tiles[h][w].posn, tiles[h][w].type)):
@@ -82,7 +87,8 @@ func check_for_matches():
 						ordered_matches.append(p)
 
 	# Go through matches to find special matches
-		# USE marked_for_destruction as marker if already processed for a bomb
+	# USE marked_for_destruction as marker if already processed for a bomb
+
 	###
 	# First check for long stretches 6+
 	# search right then down
@@ -146,7 +152,6 @@ func check_for_matches():
 			if (tiles[m.y][m.x].marked_for_destruction):
 				break
 			var c = count_matches_in_direction(m, matches, dir)
-			print("CHECKING ", m, c)
 			if (c >= 4):
 				var match_color = matches[m]
 				var mid = floor((c-1) / 2)
@@ -168,24 +173,10 @@ func check_for_matches():
 						tiles[p.y][p.x].marked_for_destruction = true
 						tiles[p.y][p.x].placing_bomb = false
 
-	# TODO queue the bomb destruction? store in bombs field, and have main check that and queue this?
-	while (process_one_bomb()):
-		pass
+#	if (matches.size() > 0):
+#		_debug_log_grid()
 	
-	if (matches.size() > 0):
-		_debug_log_grid()
-	
-	# Delete all the nodes
-	for m in matches:
-#		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
-		if (!tiles[m.y][m.x].placing_bomb):
-			tiles[m.y][m.x].destroy(20)
-			tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
-		else:
-			tiles[m.y][m.x].make_bomb()
-	
-	clear_placing_bombs()
-	
+#	print(matches.size(), matches)
 	return (matches.size() > 0)
 
 func count_matches_in_direction(posn:Vector2, dict:Dictionary, dir:Vector2):
@@ -204,9 +195,10 @@ func count_matches_in_direction(posn:Vector2, dict:Dictionary, dir:Vector2):
 			break
 	return count
 
+# return number of seconds for the bomb animation to play
 func process_one_bomb():
 	if (bombs.is_empty()):
-		return false
+		return 0
 	var bomb = bombs.pop_front()
 	if (bomb.bomb_type == Global.Modifier.BOMB):
 		#iterate through all nodes and add all of that color to list to get destroyed
@@ -217,6 +209,7 @@ func process_one_bomb():
 				# Only add in new tiles, so don't need to worry about new bombs (still in matches)
 				if (tiles[h][w].type == bomb.tile_type):
 					add_to_matches_and_bombs(p)
+		return 0.5
 	elif (bomb.bomb_type == Global.Modifier.DESTROYER_OF_EIGHT_TILES):
 		for dir in [Vector2(-1,-1), Vector2(-1,0), Vector2(-1,1),
 					Vector2(0,-1), Vector2(0,1),
@@ -224,6 +217,7 @@ func process_one_bomb():
 			var p = bomb.posn + dir
 			if (p.x >= 0 && p.x < width && p.y >= 0 && p.y < height):
 				add_to_matches_and_bombs(p)
+		return 0.8
 	elif (bomb.bomb_type == Global.Modifier.VERTICAL):
 		for i in height:
 			var p = Vector2(bomb.posn.x, i)
@@ -232,7 +226,7 @@ func process_one_bomb():
 		for i in width:
 			var p = Vector2(i, bomb.posn.y)
 			add_to_matches_and_bombs(p)
-	return true
+	return 0.3
 
 func add_to_matches_and_bombs(p: Vector2):
 	if (!matches.has(p)):
@@ -251,9 +245,28 @@ func add_to_matches_and_bombs(p: Vector2):
 	return false
 
 func clear_placing_bombs():
-	for m in matches:
+	for m in placing_bombs:
 		tiles[m.y][m.x].placing_bomb = false
 		tiles[m.y][m.x].marked_for_destruction = false
+		tiles[m.y][m.x].make_bomb()
+
+func destroy_matches():
+	# Moves new matches to destroyed_matches, then plays their destroy animation
+	var destroyed:bool = false
+	for m in matches:
+#		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
+		if (!destroyed_matches.has(m)):
+			tiles[m.y][m.x].play_destroy_anim(20, global_posn_from_grid(m))
+			if (!tiles[m.y][m.x].placing_bomb):
+				tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
+			else:
+				# mark as placing_bombs for later, will animated their creation then
+				placing_bombs[m] = true
+			destroyed_matches[m] = true
+			destroyed = true
+	if destroyed:
+		disable_all_clickable_tiles()
+	return destroyed
 
 func posn_from_grid(grid:Vector2):
 	return grid * tile_spread
@@ -319,6 +332,9 @@ func drop_tiles():
 		# start from the bottom and go up
 		for h in range(height-1, -1, -1):
 			if (tiles[h][w].type == Global.TileType.EMPTY):
+				tiles[h][w].destroy()
+# Check if it has been destroyed, but isn't a new bomb
+# if (destroyed_matches.has(Vector2(w,h)) && !placing_bombs.has(Vector2(w,h))):
 				delete_count += 1
 				# tile will delete itself after playing destruction animations?
 				# tiles[h][w].queue_free()
