@@ -76,3 +76,4 @@ func get_index_from_modifier(m: Modifier):
 	return 0
 
 var GAME_OVER:bool = false
+

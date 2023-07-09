@@ -262,13 +262,13 @@ func clear_placing_bombs():
 		tiles[m.y][m.x].make_bomb()
 	return true
 
-func destroy_matches():
+func destroy_matches(cascade: int):
 	# Moves new matches to destroyed_matches, then plays their destroy animation
 	var destroyed:bool = false
 	for m in matches:
 #		tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 		if (!destroyed_matches.has(m)):
-			tiles[m.y][m.x].play_destroy_anim(20, global_posn_from_grid(m))
+			tiles[m.y][m.x].play_destroy_anim(cascade, global_posn_from_grid(m))
 			if (!tiles[m.y][m.x].placing_bomb):
 				tiles[m.y][m.x].set_type_and_modifier(Global.TileType.EMPTY, Global.Modifier.NONE)
 			else:

@@ -114,13 +114,24 @@ var explosion_shaders = [preload("res://shaders/explosion_material_red.tres"), p
 
 var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/destroyer_bomb_anim.tscn"),preload("res://scenes/color_bomb_anim.tscn")]
 
-func play_destroy_anim(points: int, global_posn: Vector2):
-	$Node/RichTextLabel.add_text(str(points))
-	#play destruction animation
-#	var tween: Tween = create_tween()
-#	tween.connect("finished", delete_self)
-#	tween.tween_property(self,"position",Vector2(position.x, position.y + 100), 3).set_trans(Tween.TRANS_QUAD)
-	# TODO handle bombs specially?
+func play_destroy_anim(cascade: int, global_posn: Vector2):
+	$Node/RichTextLabel.add_text(str(cascade))
+	
+	var pts = cascade
+	match modifier:
+		Global.Modifier.NONE:
+			pts *= 20
+		Global.Modifier.HORIZONTAL:
+			pts *= 40
+		Global.Modifier.VERTICAL:
+			pts *= 40
+		Global.Modifier.DESTROYER_OF_EIGHT_TILES:
+			pts *= 60
+		Global.Modifier.BOMB:
+			pts *= 100
+	#TODO spawn score obj
+	Events.emit_signal("increase_score", pts)
+
 	$Node.visible = false
 	if (is_player):
 		AudioAutoload.play_die()
@@ -134,6 +145,7 @@ func play_destroy_anim(points: int, global_posn: Vector2):
 #		explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(type)])
 		$GPUParticles2D.process_material = explosion_shaders[Global.get_index_from_type(type)]
 		$GPUParticles2D.emitting = true
+	
 
 func destroy_bomb_tile(global_posn: Vector2, t: Global.TileType, mod: Global.Modifier):
 	AudioAutoload.play_bomb()

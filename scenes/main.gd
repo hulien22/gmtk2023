@@ -12,16 +12,20 @@ var finger_swap: Array[Vector2] = []
 enum Turn {PLAYER_TURN, FINGER_TURN}
 var turn: Turn = Turn.PLAYER_TURN
 
+var score: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	AudioAutoload.regspeed()
 	Global.GAME_OVER = false
+	score = 0
 	$Grid2.build_grid(9,9)
 	$Grid2.set_clickable_tiles()
 #	print("picked:", select_finger_swap())
 	Events.connect("move_player_click", _on_tile_clicked)
 	Events.connect("finger_click_complete", _on_fingerclick_complete)
+	Events.connect("increase_score", _on_increase_score)
 	$TurnTimer.connect("timeout", _on_turntimer_timeout)
 	$PlayerMoveTimer.connect("timeout", _on_playermovetimer_timeout)
 	$FingerMoveTimer.connect("timeout", _on_fingermovetimer_timeout)
@@ -136,16 +140,16 @@ func check_loop():
 		AudioAutoload.play_pop(cascades)
 		
 		# TODO queue the bomb destruction? store in bombs field, and have main check that and queue this?
-		if $Grid2.destroy_matches():
+		if $Grid2.destroy_matches(cascades + 1):
 			await get_tree().create_timer(0.3).timeout
 		while (true):
 			var bomb_time = $Grid2.process_one_bomb()
 			if (bomb_time.size() == 2):
 				await get_tree().create_timer(bomb_time[0]).timeout
-				$Grid2.destroy_matches()
+				$Grid2.destroy_matches(cascades + 1)
 				await get_tree().create_timer(bomb_time[1]).timeout
 			else:
-				if $Grid2.destroy_matches():
+				if $Grid2.destroy_matches(cascades + 1):
 					await get_tree().create_timer(0.3).timeout
 				break
 		
@@ -214,4 +218,6 @@ func estimate_score(type_grid, width, height):
 						matches.append(p)
 	return len(matches)
 
-	
+func _on_increase_score(amount:int):
+	score += amount
+	$ScoreLabel.text = str(score)

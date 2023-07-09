@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cl48nlgu3crf"]
+[gd_scene load_steps=18 format=3 uid="uid://cl48nlgu3crf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_clwvd"]
 [ext_resource type="Texture2D" uid="uid://btihnq2roxvea" path="res://art/template.png" id="1_k48c2"]
@@ -10,8 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://bcmtmyj0me6yt" path="res://art/template_colored_3.png" id="6_ufsn4"]
 [ext_resource type="Texture2D" uid="uid://ddiurxqm6pxxq" path="res://art/hand_select_1.png" id="7_x3yof"]
 [ext_resource type="Texture2D" uid="uid://tdko3ersywby" path="res://art/hand_select_2.png" id="8_1ck4k"]
+[ext_resource type="FontFile" uid="uid://xckdxrxit3gj" path="res://fonts/ChalkboyRegular-vmXe7.otf" id="8_i6cds"]
 [ext_resource type="Script" path="res://scenes/VoiceAnimator.gd" id="11_ituqj"]
 [ext_resource type="FontFile" uid="uid://bmjjm58wxhp3j" path="res://fonts/Kamryn 3D Italic D.otf" id="12_mueh2"]
+
+[sub_resource type="Theme" id="Theme_17gog"]
+default_font = ExtResource("8_i6cds")
+default_font_size = 50
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g014k"]
 animations = [{
@@ -99,6 +104,16 @@ script = ExtResource("5_7i0ym")
 [node name="TemplateColored3" type="Sprite2D" parent="."]
 position = Vector2(58, 363)
 texture = ExtResource("6_ufsn4")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 131.0
+offset_top = 19.0
+offset_right = 616.0
+offset_bottom = 65.0
+theme = SubResource("Theme_17gog")
+text = "0"
+horizontal_alignment = 1
+clip_text = true
 
 [node name="Grid2" parent="." instance=ExtResource("2_tq8kh")]
 position = Vector2(123, 110)
