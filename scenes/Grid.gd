@@ -200,7 +200,6 @@ func process_one_bomb():
 	if (bombs.is_empty()):
 		return []
 	var bomb = bombs.pop_front()
-	print(Time.get_time_dict_from_system(), "DELETING BOMB ", bomb)
 	bomb.tile.destroy_bomb_tile(global_posn_from_grid(bomb.posn), bomb.tile_type, bomb.bomb_type)
 	if (bomb.bomb_type == Global.Modifier.BOMB):
 		#iterate through all nodes and add all of that color to list to get destroyed
