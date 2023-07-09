@@ -215,3 +215,5 @@ func estimate_score(type_grid, width, height):
 	return len(matches)
 
 	
+func _on_try_again():
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
