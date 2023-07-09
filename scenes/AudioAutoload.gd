@@ -21,7 +21,7 @@ func toggle_music():
 
 func play_pop(cascades):
 	if !stream_paused:
-		$SoundEffect.stream = pops[cascades%len(pops)]
+		$SoundEffect.stream = pops[min(max(0,cascades),len(pops)-1)]
 		$SoundEffect.play()
 
 func play_voice(cascades):

@@ -9,11 +9,11 @@
 [ext_resource type="AudioStream" uid="uid://daehuqn2d3gj3" path="res://audio/pop_g5.mp3" id="7_nmy4r"]
 [ext_resource type="AudioStream" uid="uid://bl7qnhn3rqon1" path="res://audio/pop_a5.mp3" id="8_27gno"]
 [ext_resource type="AudioStream" uid="uid://dc5ba7piwle51" path="res://audio/pop_b5.mp3" id="9_7ixvf"]
-[ext_resource type="AudioStream" uid="uid://cgpase1yxlspo" path="res://audio/balanced.mp3" id="10_x6f0y"]
-[ext_resource type="AudioStream" uid="uid://bmcaidemglfu0" path="res://audio/healthy.mp3" id="11_ykemp"]
-[ext_resource type="AudioStream" uid="uid://cgh3up7himrex" path="res://audio/nutritious.mp3" id="12_ked1a"]
-[ext_resource type="AudioStream" uid="uid://pwlsh237ecwe" path="res://audio/invigorating.mp3" id="13_ujt4f"]
-[ext_resource type="AudioStream" uid="uid://bropd3cmbm70" path="res://audio/ketotacular.mp3" id="14_iukie"]
+[ext_resource type="AudioStream" uid="uid://kb8cqrjq406c" path="res://audio/balanced2.mp3" id="10_qmlgf"]
+[ext_resource type="AudioStream" uid="uid://dmmkmbhn0d4h" path="res://audio/healthy2.mp3" id="11_pop5h"]
+[ext_resource type="AudioStream" uid="uid://dxd4o8livc3ts" path="res://audio/nutritious2.mp3" id="12_6o31u"]
+[ext_resource type="AudioStream" uid="uid://kgwsu43couax" path="res://audio/invigorating2.mp3" id="13_3l2mb"]
+[ext_resource type="AudioStream" uid="uid://7shtu5v8u0co" path="res://audio/ketotacular2.mp3" id="14_yxf0n"]
 [ext_resource type="AudioStream" uid="uid://bt3sfdfhidos5" path="res://audio/paleopocalype.mp3" id="15_nurkk"]
 [ext_resource type="AudioStream" uid="uid://cnvn2gp6stjwy" path="res://audio/pop.mp3" id="16_kkt7d"]
 [ext_resource type="AudioStream" uid="uid://bh3mf5e8b7178" path="res://audio/knife.mp3" id="17_1tuox"]
@@ -24,7 +24,7 @@ volume_db = -15.0
 script = ExtResource("1_jdtue")
 song = ExtResource("2_yfefp")
 pops = Array[AudioStream]([ExtResource("3_h8qhr"), ExtResource("4_st6i7"), ExtResource("5_ilo8h"), ExtResource("6_51bnt"), ExtResource("7_nmy4r"), ExtResource("8_27gno"), ExtResource("9_7ixvf"), ExtResource("3_h8qhr")])
-voices = Array[AudioStream]([ExtResource("10_x6f0y"), ExtResource("11_ykemp"), ExtResource("12_ked1a"), ExtResource("13_ujt4f"), ExtResource("14_iukie"), ExtResource("15_nurkk")])
+voices = Array[AudioStream]([ExtResource("10_qmlgf"), ExtResource("11_pop5h"), ExtResource("12_6o31u"), ExtResource("13_3l2mb"), ExtResource("14_yxf0n"), ExtResource("15_nurkk")])
 destroyer = ExtResource("16_kkt7d")
 knife = ExtResource("17_1tuox")
 bomb = ExtResource("18_eslpu")
@@ -32,6 +32,6 @@ bomb = ExtResource("18_eslpu")
 [node name="SoundEffect" type="AudioStreamPlayer" parent="."]
 
 [node name="VoiceEffect" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
+volume_db = -5.0
 
 [connection signal="finished" from="." to="." method="_on_finished"]
