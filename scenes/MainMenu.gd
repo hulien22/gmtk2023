@@ -3,13 +3,16 @@ extends Control
 var main_scene: PackedScene
 var sound_on: Texture
 var sound_off: Texture
-var sound_muted: bool = false
+var sound_muted: bool
 
 func _ready():
 	main_scene = preload("res://scenes/main.tscn")
 	sound_off = preload("res://art/mute.png")
 	sound_on = preload("res://art/sound_layered.png")
 	AudioAutoload.regspeed()
+	sound_muted = AudioAutoload.stream_paused
+	if sound_muted:
+		$ToggleMusicButton.texture_normal = sound_off
 
 func _on_play():
 	AudioAutoload.play_pop(0)
