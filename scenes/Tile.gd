@@ -114,23 +114,32 @@ var explosion_shaders = [preload("res://shaders/explosion_material_red.tres"), p
 
 var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/destroyer_bomb_anim.tscn"),preload("res://scenes/color_bomb_anim.tscn")]
 
+var score_effect = preload("res://scenes/score_effect.tscn")
+
 func play_destroy_anim(cascade: int, global_posn: Vector2):
 	$Node/RichTextLabel.add_text(str(cascade))
 	
 	var pts = cascade
-	match modifier:
-		Global.Modifier.NONE:
-			pts *= 20
-		Global.Modifier.HORIZONTAL:
-			pts *= 40
-		Global.Modifier.VERTICAL:
-			pts *= 40
-		Global.Modifier.DESTROYER_OF_EIGHT_TILES:
-			pts *= 60
-		Global.Modifier.BOMB:
-			pts *= 100
+	if (placing_bomb):
+		pts *= 20
+	else:
+		match modifier:
+			Global.Modifier.NONE:
+				pts *= 20
+			Global.Modifier.HORIZONTAL:
+				pts *= 40
+			Global.Modifier.VERTICAL:
+				pts *= 40
+			Global.Modifier.DESTROYER_OF_EIGHT_TILES:
+				pts *= 60
+			Global.Modifier.BOMB:
+				pts *= 100
 	#TODO spawn score obj
 	Events.emit_signal("increase_score", pts)
+	var se = score_effect.instantiate()
+	se.setup(pts, type, global_position)
+	se.z_index = 100
+	get_parent().add_child(se)
 
 	$Node.visible = false
 	if (is_player):
