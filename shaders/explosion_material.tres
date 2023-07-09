@@ -223,6 +223,7 @@ void process() {
 "
 
 [resource]
+resource_local_to_scene = true
 shader = SubResource("Shader_7hyna")
 shader_parameter/direction = Vector3(1, 0, 0)
 shader_parameter/spread = 0.0

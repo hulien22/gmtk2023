@@ -105,7 +105,7 @@ func move(target, transformation, secs):
 var sprites = [preload("res://art/fruits/apple.png"), preload("res://art/fruits/orange.png"),
 			   preload("res://art/fruits/lemon.png"), preload("res://art/fruits/pear.png"),
 			   preload("res://art/fruits/blueberry.png"), preload("res://art/fruits/grape.png")]
-var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres").duplicate(true)
+var explosion_shader: ShaderMaterial = preload("res://shaders/explosion_material.tres")
 
 var explosions = [preload("res://scenes/horizontal_bomb_anim.tscn"),preload("res://scenes/destroyer_bomb_anim.tscn"),preload("res://scenes/color_bomb_anim.tscn")]
 
