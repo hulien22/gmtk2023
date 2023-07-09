@@ -129,7 +129,7 @@ func check_loop():
 		AudioAutoload.play_pop(cascades)
 #		await get_tree().create_timer(0.4).timeout
 		$Grid2.drop_tiles()
-		$Grid2.disable_all_clickable_tiles()
+#		$Grid2.disable_all_clickable_tiles()
 		# wait a bit in between drops
 		await get_tree().create_timer(0.4).timeout
 
