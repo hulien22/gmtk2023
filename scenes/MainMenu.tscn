@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cr166i0pgoh1p"]
 
-[ext_resource type="Texture2D" uid="uid://ctsnpqyll11fe" path="res://art/main screen.png" id="1_dmcw2"]
 [ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_fxaa3"]
+[ext_resource type="Texture2D" uid="uid://bbvtirdc486ph" path="res://art/menu and buttons/main screen.png" id="2_v0yvu"]
 [ext_resource type="Texture2D" uid="uid://qry3toefrgvm" path="res://art/menu and buttons/title.png" id="3_nc5nh"]
 [ext_resource type="Texture2D" uid="uid://bst5u5e32ctpk" path="res://art/menu and buttons/play_button.png" id="4_xoks7"]
 [ext_resource type="Texture2D" uid="uid://blws78injc384" path="res://art/sound_layered.png" id="5_4sdcb"]
@@ -24,7 +24,7 @@ offset_left = -274.0
 offset_top = 1.0
 offset_right = 1003.0
 offset_bottom = 720.0
-texture = ExtResource("1_dmcw2")
+texture = ExtResource("2_v0yvu")
 expand_mode = 1
 
 [node name="TitleTexture" type="TextureRect" parent="."]
