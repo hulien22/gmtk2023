@@ -3,6 +3,9 @@ extends AudioStreamPlayer
 @export var song: AudioStream
 @export var pops: Array[AudioStream]
 @export var voices: Array[AudioStream]
+@export var destroyer: AudioStream
+@export var knife: AudioStream
+@export var bomb: AudioStream
 
 var music_stopped: bool = false
 
@@ -25,3 +28,8 @@ func play_voice(cascades):
 	if !stream_paused:
 		$VoiceEffect.stream = voices[min(max(0,cascades),len(voices)-1)]
 		$VoiceEffect.play()
+
+func play_destroyer():
+	if !stream_paused:
+		$SoundEffect.stream = destroyer
+		$SoundEffect.play()

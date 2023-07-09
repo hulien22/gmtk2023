@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhwbf6yt3gnjl"]
+[gd_scene load_steps=9 format=3 uid="uid://bhwbf6yt3gnjl"]
 
 [ext_resource type="Texture2D" uid="uid://ctsnpqyll11fe" path="res://art/main screen.png" id="1_dmcw2"]
 [ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_fxaa3"]
 [ext_resource type="Texture2D" uid="uid://qry3toefrgvm" path="res://art/menu and buttons/title.png" id="3_nc5nh"]
 [ext_resource type="Texture2D" uid="uid://bst5u5e32ctpk" path="res://art/menu and buttons/play_button.png" id="4_xoks7"]
 [ext_resource type="Texture2D" uid="uid://blws78injc384" path="res://art/sound_layered.png" id="5_4sdcb"]
+[ext_resource type="Script" path="res://scenes/MenuButton.gd" id="5_gdj0r"]
 [ext_resource type="Texture2D" uid="uid://cdq22lvwteyhd" path="res://art/menu and buttons/help_button.png" id="6_148g2"]
 [ext_resource type="Texture2D" uid="uid://eo7k0d66osqy" path="res://art/menu and buttons/credits_button.png" id="7_rgkau"]
 
@@ -44,6 +45,7 @@ offset_bottom = 500.0
 texture_normal = ExtResource("4_xoks7")
 ignore_texture_size = true
 stretch_mode = 4
+script = ExtResource("5_gdj0r")
 
 [node name="ToggleMusicButton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -53,6 +55,7 @@ offset_right = 741.0
 offset_bottom = 614.0
 texture_normal = ExtResource("5_4sdcb")
 stretch_mode = 0
+script = ExtResource("5_gdj0r")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -63,6 +66,7 @@ offset_bottom = 621.0
 texture_normal = ExtResource("6_148g2")
 ignore_texture_size = true
 stretch_mode = 4
+script = ExtResource("5_gdj0r")
 
 [node name="TextureButton2" type="TextureButton" parent="."]
 layout_mode = 0
@@ -73,6 +77,15 @@ offset_bottom = 717.0
 texture_normal = ExtResource("7_rgkau")
 ignore_texture_size = true
 stretch_mode = 4
+script = ExtResource("5_gdj0r")
 
+[connection signal="mouse_entered" from="PlayButton" to="PlayButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PlayButton" to="PlayButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_play"]
+[connection signal="mouse_entered" from="ToggleMusicButton" to="ToggleMusicButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ToggleMusicButton" to="ToggleMusicButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="ToggleMusicButton" to="." method="_on_toggle_music"]
+[connection signal="mouse_entered" from="TextureButton" to="TextureButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="TextureButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="TextureButton2" to="TextureButton2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton2" to="TextureButton2" method="_on_mouse_exited"]
