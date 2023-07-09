@@ -15,6 +15,10 @@ func _on_play():
 	AudioAutoload.play_pop(0)
 	get_tree().change_scene_to_packed(main_scene)
 
+func _on_help():
+	AudioAutoload.play_pop(0)
+	get_tree().change_scene_to_file("res://scenes/HelpMenu.tscn")
+
 func _on_toggle_music():
 	if sound_muted:
 		$ToggleMusicButton.texture_normal = sound_on
