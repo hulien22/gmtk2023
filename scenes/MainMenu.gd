@@ -11,6 +11,7 @@ func _ready():
 	sound_on = preload("res://art/sound_layered.png")
 
 func _on_play():
+	AudioAutoload.play_pop(0)
 	get_tree().change_scene_to_packed(main_scene)
 
 func _on_toggle_music():
