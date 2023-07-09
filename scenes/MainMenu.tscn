@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhwbf6yt3gnjl"]
+[gd_scene load_steps=8 format=3 uid="uid://bhwbf6yt3gnjl"]
 
-[ext_resource type="Texture2D" uid="uid://y8kqi24xhcvr" path="res://art/main screen.png" id="1_dmcw2"]
+[ext_resource type="Texture2D" uid="uid://ctsnpqyll11fe" path="res://art/main screen.png" id="1_dmcw2"]
 [ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_fxaa3"]
-[ext_resource type="Texture2D" uid="uid://cxh5pva6q3vqy" path="res://art/fruits/apple.png" id="2_6hdg1"]
-[ext_resource type="Texture2D" uid="uid://vaqekofg073i" path="res://art/fruits/blueberry_explode.png" id="4_eyb1p"]
+[ext_resource type="Texture2D" uid="uid://qry3toefrgvm" path="res://art/menu and buttons/title.png" id="3_nc5nh"]
+[ext_resource type="Texture2D" uid="uid://bst5u5e32ctpk" path="res://art/menu and buttons/play_button.png" id="4_xoks7"]
+[ext_resource type="Texture2D" uid="uid://blws78injc384" path="res://art/sound_layered.png" id="5_4sdcb"]
+[ext_resource type="Texture2D" uid="uid://cdq22lvwteyhd" path="res://art/menu and buttons/help_button.png" id="6_148g2"]
+[ext_resource type="Texture2D" uid="uid://eo7k0d66osqy" path="res://art/menu and buttons/credits_button.png" id="7_rgkau"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -23,25 +26,53 @@ offset_bottom = 720.0
 texture = ExtResource("1_dmcw2")
 expand_mode = 1
 
+[node name="TitleTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 2.0
+offset_right = 700.0
+offset_bottom = 209.0
+texture = ExtResource("3_nc5nh")
+expand_mode = 1
+
 [node name="PlayButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 224.0
-offset_right = 139.0
-offset_bottom = 334.0
-texture_normal = ExtResource("2_6hdg1")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="PlayButton"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-text = "Play"
+offset_left = 26.0
+offset_top = 373.0
+offset_right = 286.0
+offset_bottom = 500.0
+texture_normal = ExtResource("4_xoks7")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="ToggleMusicButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture_normal = ExtResource("4_eyb1p")
+offset_left = 619.0
+offset_top = 492.0
+offset_right = 741.0
+offset_bottom = 614.0
+texture_normal = ExtResource("5_4sdcb")
+stretch_mode = 0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 489.0
+offset_right = 274.0
+offset_bottom = 621.0
+texture_normal = ExtResource("6_148g2")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 602.0
+offset_right = 368.0
+offset_bottom = 717.0
+texture_normal = ExtResource("7_rgkau")
+ignore_texture_size = true
+stretch_mode = 4
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play"]
 [connection signal="pressed" from="ToggleMusicButton" to="." method="_on_toggle_music"]

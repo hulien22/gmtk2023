@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bt3sfdfhidos5" path="res://audio/paleopocalype.mp3" id="15_nurkk"]
 
 [node name="AudioAutoload" type="AudioStreamPlayer"]
-volume_db = -10.0
+volume_db = -15.0
 script = ExtResource("1_jdtue")
 song = ExtResource("2_yfefp")
 pops = Array[AudioStream]([ExtResource("3_h8qhr"), ExtResource("4_st6i7"), ExtResource("5_ilo8h"), ExtResource("6_51bnt"), ExtResource("7_nmy4r"), ExtResource("8_27gno"), ExtResource("9_7ixvf"), ExtResource("3_h8qhr")])
@@ -26,5 +26,6 @@ voices = Array[AudioStream]([ExtResource("10_x6f0y"), ExtResource("11_ykemp"), E
 [node name="SoundEffect" type="AudioStreamPlayer" parent="."]
 
 [node name="VoiceEffect" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
 
 [connection signal="finished" from="." to="." method="_on_finished"]
