@@ -132,7 +132,8 @@ func check_loop():
 		$Grid2.disable_all_clickable_tiles()
 		# wait a bit in between drops
 		await get_tree().create_timer(0.4).timeout
-	AudioAutoload.play_voice(cascades)
+	if cascades >= 0:
+		AudioAutoload.play_voice(cascades)
 
 func select_finger_swap():
 	# TODO do we need to be smarter about this to stop player from just corner camping?
