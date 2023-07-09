@@ -16,6 +16,12 @@ func _ready():
 
 func _on_finished():
 	play()
+
+func slowmo():
+	pitch_scale = 0.7
+
+func regspeed():
+	pitch_scale = 1
 	
 func toggle_music():
 	stream_paused = !stream_paused

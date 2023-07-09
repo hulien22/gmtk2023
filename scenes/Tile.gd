@@ -202,6 +202,7 @@ func make_bomb():
 
 func explode_player(t: Global.TileType):
 	Engine.time_scale = 1
+#	AudioAutoload.regspeed()
 	explosion_shader.set_shader_parameter("sprite", sprites[Global.get_index_from_type(t)])
 	$GPUParticles2D.process_material = explosion_shader
 	$GPUParticles2D.amount = 10000

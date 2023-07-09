@@ -249,6 +249,7 @@ func add_to_matches_and_bombs(p: Vector2):
 		if p == player_posn:
 			Engine.time_scale = 0.05
 			player_posn = Vector2.INF
+			AudioAutoload.slowmo()
 		return true
 	return false
 

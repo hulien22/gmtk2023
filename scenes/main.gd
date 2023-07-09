@@ -15,6 +15,7 @@ var turn: Turn = Turn.PLAYER_TURN
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	AudioAutoload.regspeed()
 	Global.GAME_OVER = false
 	$Grid2.build_grid(9,9)
 	$Grid2.set_clickable_tiles()

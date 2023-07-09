@@ -9,6 +9,7 @@ func _ready():
 	main_scene = preload("res://scenes/main.tscn")
 	sound_off = preload("res://art/mute.png")
 	sound_on = preload("res://art/sound_layered.png")
+	AudioAutoload.regspeed()
 
 func _on_play():
 	AudioAutoload.play_pop(0)
