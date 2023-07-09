@@ -24,17 +24,17 @@ func _process(delta):
 func play_animation(score, cascades):
 	if !has_died:
 		var val = -1
-		if (score > 1500 || cascades > 8):
+		if (score > 2000 || cascades > 8):
 			val = 5
-		elif (score > 1000 || cascades > 6):
+		elif (score > 1500 || cascades > 6):
 			val = 4
-		elif (score > 800 || cascades > 5):
+		elif (score > 1000 || cascades > 5):
 			val = 3
-		elif (score > 600 || cascades > 4):
+		elif (score > 750 || cascades > 4):
 			val = 2
-		elif (score > 400 || cascades > 3):
+		elif (score > 500 || cascades > 3):
 			val = 1
-		elif (score > 200 || cascades > 2):
+		elif (score > 250 || cascades > 2):
 			val = 0
 		
 		if (val >= 0):
